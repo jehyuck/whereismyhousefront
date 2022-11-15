@@ -28,9 +28,7 @@
       <div class="col-lg-12">
         <div class="nav-inner">
           <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="${root}/index">
-              <img src="@/assets/images/logo/logo.svg" alt="Logo" />
-            </a>
+            <router-link class="navbar-brand" to="/"><img src="@/assets/images/logo/logo.svg" alt="Logo" /></router-link>
             <button
               class="navbar-toggler mobile-menu-btn"
               type="button"
@@ -46,14 +44,14 @@
             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
               <ul id="nav" class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a class="active dd-menu collapsed" href="${root}/index" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                    >Home</a
+                  <router-link class="active dd-menu collapsed" to="/" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    >Home</router-link
                   >
                 </li>
                 <li class="nav-item">
                   <a
                     class="dd-menu collapsed"
-                    href="javascript:void(0)"
+                    to="javascript:void(0)"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-4"
                     aria-controls="navbarSupportedContent"
@@ -63,10 +61,10 @@
                   >
                   <ul class="sub-menu collapse" id="submenu-1-4">
                     <ul>
-                      <li class="nav-item"><a href="${root}/house/page">검색</a></li>
-                      <li class="nav-item"><a href="${root}/pages/about-us">홈페이지 소개</a></li>
-                      <li class="nav-item"><a href="${root}/notice/selectAll">공지사항</a></li>
-                      <li class="nav-item"><a href="${root}/pages/sitemap">사이트맵</a></li>
+                      <li class="nav-item"><router-link to="/house/page">검색</router-link></li>
+                      <li class="nav-item"><router-link to="/pages/about-us">홈페이지 소개</router-link></li>
+                      <li class="nav-item"><router-link to="/notice/selectAll">공지사항</router-link></li>
+                      <li class="nav-item"><router-link to="/pages/sitemap">사이트맵</router-link></li>
                     </ul>
                   </ul>
                 </li>
@@ -74,7 +72,7 @@
                 <li class="nav-item">
                   <a
                     class="dd-menu collapsed"
-                    href="javascript:void(0)"
+                    to="javascript:void(0)"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-5"
                     aria-controls="navbarSupportedContent"
@@ -83,7 +81,7 @@
                     >My Page</a
                   >
                   <ul class="sub-menu collapse" id="submenu-1-5">
-                    <li class="nav-item"><a href="${root}/bookmark/selectAll">나의 관심 지역</a></li>
+                    <li class="nav-item"><router-link to="/bookmark/selectAll">나의 관심 지역</router-link></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -98,28 +96,28 @@
                 <!-- <c:choose>
                   <c:when test="${empty userInfo}">
                     <li>
-                      <a href="${root}/user/login"><i class="lni lni-enter"></i> 로그인</a>
+                      <router-link to="/user/login"><i class="lni lni-enter"></i> 로그인</router-link>
                     </li>
                     <li>
-                      <a href="${root}/user/regist"><i class="lni lni-user"></i> 회원가입</a>
+                      <router-link to="/user/regist"><i class="lni lni-user"></i> 회원가입</router-link>
                     </li>
                   </c:when>
                   <c:otherwise>
                     <c:choose>
                       <c:when test="${userInfo.id eq 'admin'}">
                         <li>
-                          <a href="${root}/notice/selectAll"><i class="lni lni-user"></i> 공지사항 관리</a>
+                          <router-link to="/notice/selectAll"><i class="lni lni-user"></i> 공지사항 관리</router-link>
                         </li>
                         <li>
-                          <a href="${root}/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
+                          <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link>
                         </li>
                       </c:when>
                       <c:otherwise>
                         <li>
-                          <a href="${root}/user/update"><i class="lni lni-user"></i> 회원정보</a>
+                          <router-link to="/user/update"><i class="lni lni-user"></i> 회원정보</router-link>
                         </li>
                         <li>
-                          <a href="${root}/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
+                          <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link>
                         </li>
                       </c:otherwise>
                     </c:choose>
