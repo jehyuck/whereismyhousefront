@@ -7,14 +7,12 @@ var gugun = getParameterByName("gugun");
 var dong = getParameterByName("dong");
 var selected = false;
 window.addEventListener('load', function() {
-	console.log("dong............." + dong);
-	
+    console.log("dong............." + dong);
     if(dong != "") {
         selected = true;
     }
 	sendRequest("sido", "*00000000");
 	
-
 	document.querySelector("#sido").addEventListener("change", function () {
 		if (this[this.selectedIndex].value) {
 			let regcode = this[this.selectedIndex].value.substr(0, 2) + "*00000";
