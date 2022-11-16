@@ -70,7 +70,6 @@ export default {
     //DOM객체와 연결되었고 Vue의 속성들도 초기화 된 상태
     this.qnaNo = this.$route.query.qnaNo;
     console.log('view.html..................qnaNo]', this.qnaNo);
-    this.qna = { qnaNo: '1', userId: '제혁', title: '몰라요', content: '모르겠어요', answer: '잘하세요', createdDate: '2022-11-11' };
     http.get(`/qna/${this.qnaNo}`).then(({ data }) => {
       this.qna = data;
     });

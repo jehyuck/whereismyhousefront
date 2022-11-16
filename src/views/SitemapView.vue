@@ -1,5 +1,60 @@
 <template>
   <div class="about">
-    <h1>여기에 로긴 화면 만들어 주세요!!!!</h1>
+    <!-- 메인 섹션 START -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 col-12">
+            <div class="breadcrumbs-content">
+              <h1 class="page-title">사이트맵</h1>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <ul class="breadcrumb-nav">
+              <li><a href="${root}/index">Home</a></li>
+              <li>SITEMAP</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="sitemap section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12">
+            <div class="list-group">
+              <h3><a href="${root}/index">HOME</a></h3>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-12">
+            <div class="list-group">
+              <h3>PAGES</h3>
+              <ul>
+                <li class="nav-item zz"><router-link to="/aptsearch">검색</router-link></li>
+                <li class="nav-item zz"><router-link to="/about">홈페이지 소개</router-link></li>
+                <li class="nav-item zz"><router-link to="/notice">공지사항</router-link></li>
+                <li class="nav-item zz"><router-link to="/sitemap">사이트맵</router-link></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <div class="list-group">
+              <h3>사용자</h3>
+              <ul>
+                <li class="nav-item zz"><router-link to="/login">로그인</router-link></li>
+                <li class="nav-item zz"><router-link to="/regist">회원가입</router-link></li>
+                <li class="nav-item zz"><router-link to="/findPassword">비밀번호 찾기</router-link></li>
+                <li class="nav-item zz"><router-link to="/mypage">회원 정보 조회 및 수정</router-link></li>
+                <li class="nav-item zz"><router-link to="/mypage/bookmark">관심 지역 목록</router-link></li>
+                <li class="nav-item zz"><router-link to="/mypage/withdrawal">회원 탈퇴</router-link></li>
+                <li class="nav-item zz"><router-link to="/mypage">로그아웃</router-link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>

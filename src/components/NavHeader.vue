@@ -59,12 +59,12 @@
                     aria-label="Toggle navigation"
                     >Pages</a
                   >
-                  <ul class="sub-menu collapse" id="submenu-1-4">
-                    <ul>
-                      <li class="nav-item"><router-link to="/house/page">검색</router-link></li>
-                      <li class="nav-item"><router-link to="/pages/about-us">홈페이지 소개</router-link></li>
-                      <li class="nav-item"><router-link to="/notice/selectAll">공지사항</router-link></li>
-                      <li class="nav-item"><router-link to="/pages/sitemap">사이트맵</router-link></li>
+                  <ul class="sub-menu collapse zz" id="submenu-1-4">
+                    <ul class="zz">
+                      <li class="nav-item zz"><router-link to="/aptsearch">검색</router-link></li>
+                      <li class="nav-item zz"><router-link to="/about">홈페이지 소개</router-link></li>
+                      <li class="nav-item zz"><router-link to="/noticelist">공지사항</router-link></li>
+                      <li class="nav-item zz"><router-link to="/sitemap">사이트맵</router-link></li>
                     </ul>
                   </ul>
                 </li>

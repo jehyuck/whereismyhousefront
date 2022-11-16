@@ -63,7 +63,7 @@ export default {
         alert(msg);
       } else {
         //수정하기
-        http.put('/answer', { qnaNo: this.qna.qnaNo, answer: this.qna.answer }).then(({ data }) => {
+        http.put('qna/answer', { qnaNo: this.qna.qnaNo, answer: this.qna.answer }).then(({ data }) => {
           if (data == 'success') {
             alert('등록성공');
             this.moveHandler();

@@ -19,7 +19,9 @@ p {
   font-family: lato, sans-serif;
   font-size: 15px
 }
-
+.zz {
+  z-index: 6 !important
+}
 * {
   margin: 0;
   padding: 0
@@ -888,7 +890,7 @@ ol {
   padding-bottom: 45px;
   padding-top: 140px;
   background: #081828;
-  z-index: 2;
+  z-index: 0;
   text-align: left
 }
 
@@ -1901,10 +1903,9 @@ ol {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  z-index: 2;
+  z-index: 0;
   padding-top: 250px;
   padding-bottom: 300px;
-  z-index: 2
 }
 
 .hero-area.overlay::before {
