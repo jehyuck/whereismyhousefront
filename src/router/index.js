@@ -126,8 +126,8 @@ const routes = [
     component: APTDetailView,
   },
   {
-    path: '/noicelist',
-    name: 'noiceList',
+    path: '/noticelist',
+    name: 'noticeList',
     component: NoiceListView,
   },
   {
