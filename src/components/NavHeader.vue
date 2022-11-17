@@ -93,36 +93,38 @@
             <!-- navbar collapse -->
             <div class="login-button">
               <ul>
-                <!-- <c:choose>
+                <c:choose>
                   <c:when test="${empty userInfo}">
                     <li>
-                      <router-link to="/user/login"><i class="lni lni-enter"></i> 로그인</router-link>
+                      <router-link to="/login"><i class="lni lni-enter"></i> 로그인</router-link>
                     </li>
                     <li>
-                      <router-link to="/user/regist"><i class="lni lni-user"></i> 회원가입</router-link>
+                      <router-link to="/regist"><i class="lni lni-user"></i> 회원가입</router-link>
                     </li>
                   </c:when>
                   <c:otherwise>
                     <c:choose>
                       <c:when test="${userInfo.id eq 'admin'}">
                         <li>
-                          <router-link to="/notice/selectAll"><i class="lni lni-user"></i> 공지사항 관리</router-link>
+                          <router-link to="/noticelist"><i class="lni lni-user"></i> 공지사항 관리</router-link>
                         </li>
                         <li>
-                          <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link>
+                          <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
+                          <a href="/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
                         </li>
                       </c:when>
                       <c:otherwise>
                         <li>
-                          <router-link to="/user/update"><i class="lni lni-user"></i> 회원정보</router-link>
+                          <router-link to="/mypage"><i class="lni lni-user"></i> 회원정보</router-link>
                         </li>
                         <li>
-                          <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link>
+                          <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
+                          <a href="/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
                         </li>
                       </c:otherwise>
                     </c:choose>
                   </c:otherwise>
-                </c:choose> -->
+                </c:choose>
               </ul>
             </div>
           </nav>
