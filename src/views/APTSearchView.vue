@@ -126,7 +126,7 @@
                           <div class="col-12">
                             <div class="pagination left">
                               <ul class="pagination-list">
-                                <c:set var="curPgNo" value="${pgNo}"></c:set>
+                                <!-- <c:set var="curPgNo" value="${pgNo}"></c:set>
                                 <c:forEach var="pgIdx" begin="1" end="${pgSize + 1}" step="1">
                                   <c:choose>
                                     <c:when test="${curPgNo eq pgIdx}">
@@ -136,7 +136,7 @@
                                       <li><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
                                     </c:otherwise>
                                   </c:choose>
-                                </c:forEach>
+                                </c:forEach> -->
                               </ul>
                             </div>
                           </div>
@@ -215,22 +215,16 @@
                               <ul class="pagination-list">
                                 <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${(pgNo-10 > 0 ? pgNo-10 : 1)}">이전</a>
 
-                                <div
-                                  v-for="(item, index) in items"
-                                  :key="index"
-                                  var="pgIdx"
-                                  begin="${(pgNo - (pgNo)%10) < 1 ? 1 : pgNo - (pgNo)%10}"
-                                  end="${(pgNo - pgNo%10 + 9) > pgSize ? pgSize : (pgNo - pgNo%10 + 9)}"
-                                  step="1"
-                                >
-                                  <c:choose>
+                                <div v-for="(item, index) in list" :key="index">
+                                  {{ item }}
+                                  <!-- <c:choose>
                                     <c:when test="${pgNo eq pgIdx}">
                                       <li class="active"><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">{{}}</a></li>
                                     </c:when>
                                     <c:otherwise>
                                       <li><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
                                     </c:otherwise>
-                                  </c:choose>
+                                  </c:choose> -->
                                 </div>
                                 <a
                                   href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${((pgNo+10 > pgSize ? pgSize : pgNo+10 - pgNo%10) == 0 ? 1 : (pgNo+10 - pgNo%10))}"
@@ -269,13 +263,32 @@ import { mapState } from 'vuex';
 
 export default {
   data() {
-    return {};
+    return {
+      list: [],
+    };
   },
   computed: {
     ...mapState(['apts', 'totalListSize', 'pgSize', 'pgno', 'start', 'end']),
   },
   components: {
     SearchBox,
+  },
+  methods: {
+    range(start, end) {
+      var arr = [];
+
+      var length = end - start;
+
+      for (var i = 0; i <= length; i++) {
+        arr[i] = start;
+        start++;
+      }
+
+      return arr;
+    },
+    makeList() {
+      this.list = this.range(this.start, this.end);
+    },
   },
 };
 </script>
