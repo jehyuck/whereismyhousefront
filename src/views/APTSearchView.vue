@@ -51,140 +51,195 @@
                         </div>
                       </div>
                     </div>
+                    <!-- 아파트 배열 출력하기 -->
                     <div class="tab-content" id="nav-tabContent">
                       <div class="tab-pane fade" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                         <div class="row">
-                          <!-- 리스트 반복문 시작 -->
-                          <!-- <c:forEach items="${houseList}" var="house">
-                            <div class="col-lg-4 col-md-6 col-12">
-                              <div class="single-item-grid">
-                                <div class="image">
-                                  <a
-                                    href="${root}/house/aptSearch?aptCode=${house.aptCode}&aptName=${house.aptName}&sidoName=${house.sidoName}&gugunName=${house.gugunName}&dongName=${house.dongName}&jibun=${house.jibun}&dealAmount=${house.dealAmount}&lat=${house.lat}&lng=${house.lng}"
-                                    ><img src="${root}/assets/images/apart/apart2.jpg" alt="#"
-                                  /></a>
-                                  <i class="cross-badge lni lni-bolt"></i>
-                                </div>
-                                <div class="content">
-                                  <h3 class="title">
-                                    <a
-                                      href="${root}/house/aptSearch?aptCode=${house.aptCode}&aptName=${house.aptName}&sidoName=${house.sidoName}&gugunName=${house.gugunName}&dongName=${house.dongName}&jibun=${house.jibun}&dealAmount=${house.dealAmount}&lat=${house.lat}&lng=${house.lng}"
-                                      >${house.aptName}</a
-                                    >
-                                  </h3>
-                                  <p class="location">
-                                    <a href="javascript:void(0)"
-                                      ><i class="lni lni-map-marker"> </i>${house.sidoName}
-                                      ${house.gugunName} ${house.dongName} ${house.jibun}</a
-                                    >
-                                  </p>
-                                  <ul class="info">
-                                    <li class="price">최근 거래가</li>
-                                    <li class="like">
-                                      <a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                    </li>
-                                    <li class="price me-1" style="float: right">
-                                      ${house.dealAmount} 만 원
-                                    </li>
-                                  </ul>
+                          <div v-for="(apt, index) in apts" :key="index">
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-12">
+                                <div class="single-item-grid">
+                                  <div class="row align-items-center">
+                                    <div class="col-lg-5 col-md-7 col-12">
+                                      <div class="image">
+                                        <router-link
+                                          :to="{
+                                            name: `aptDetail`,
+                                            query: {
+                                              aptCode: apt.aptCode,
+                                              aptName: apt.aptName,
+                                              sidoName: apt.sidoName,
+                                              gugunName: apt.gugunName,
+                                              dongName: apt.dongName,
+                                              jibun: apt.jibun,
+                                              dealAmount: apt.dealAmount,
+                                              lat: apt.lat,
+                                              lng: apt.lng,
+                                            },
+                                          }"
+                                        >
+                                          <img src="@/assets/images/apart/apart1.jpg" alt="#" />
+                                        </router-link>
+                                        <i class="cross-badge lni lni-bolt"></i>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-5 col-12">
+                                      <div class="content">
+                                        <h3 class="title">
+                                          <router-link
+                                            :to="{
+                                              name: `aptDetail`,
+                                              query: {
+                                                aptCode: apt.aptCode,
+                                                aptName: apt.aptName,
+                                                sidoName: apt.sidoName,
+                                                gugunName: apt.gugunName,
+                                                dongName: apt.dongName,
+                                                jibun: apt.jibun,
+                                                dealAmount: apt.dealAmount,
+                                                lat: apt.lat,
+                                                lng: apt.lng,
+                                              },
+                                            }"
+                                            >{{ apt.aptName }}</router-link
+                                          >
+                                        </h3>
+                                        <p class="location">
+                                          <a href="javascript:void(0)"><i class="lni lni-map-marker"> </i>{{ apt.sidoName }} {{ apt.gugunName }} {{ apt.dongName }} {{ apt.jibun }}</a>
+                                        </p>
+                                        <ul class="info">
+                                          <li class="price">최근 거래가</li>
+                                          <li class="like">
+                                            <a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+                                          </li>
+                                          <li class="price me-1" style="float: right">{{ apt.dealAmount }} 만 원</li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </c:forEach> -->
-                          <!-- 리스트 반복문 종료 -->
+                          </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                           <div class="col-12">
                             <div class="pagination left">
                               <ul class="pagination-list">
-                              <c:set var = "curPgNo" value = "${pgNo}"></c:set>
-                              <c:forEach var="pgIdx" begin="1" end="${pgSize + 1}" step="1">
-                                <c:choose>
-                                  <c:when test="${curPgNo eq pgIdx}">
-                                    <li class="active"><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                  </c:when>
-                                  <c:otherwise>
-                                    <li><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:forEach>
+                                <c:set var="curPgNo" value="${pgNo}"></c:set>
+                                <c:forEach var="pgIdx" begin="1" end="${pgSize + 1}" step="1">
+                                  <c:choose>
+                                    <c:when test="${curPgNo eq pgIdx}">
+                                      <li class="active"><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <li><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
+                                    </c:otherwise>
+                                  </c:choose>
+                                </c:forEach>
                               </ul>
                             </div>
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                       <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                        <div class="row">
-                          <!-- 리스트 반복문 시작 -->
-                          <!-- <c:forEach items="${houseList}" var="house">
+                        <div v-for="(apt, index) in apts" :key="index">
+                          <div class="row">
                             <div class="col-lg-12 col-md-12 col-12">
                               <div class="single-item-grid">
                                 <div class="row align-items-center">
                                   <div class="col-lg-5 col-md-7 col-12">
                                     <div class="image">
-                                      <a
-                                        href="${root}/house/aptSearch?aptCode=${house.aptCode}&aptName=${house.aptName}&sidoName=${house.sidoName}&gugunName=${house.gugunName}&dongName=${house.dongName}&jibun=${house.jibun}&dealAmount=${house.dealAmount}&lat=${house.lat}&lng=${house.lng}"
-                                        ><img src="${root}/assets/images/apart/apart1.jpg" alt="#"
-                                      /></a>
+                                      <router-link
+                                        :to="{
+                                          name: `aptDetail`,
+                                          query: {
+                                            aptCode: apt.aptCode,
+                                            aptName: apt.aptName,
+                                            sidoName: apt.sidoName,
+                                            gugunName: apt.gugunName,
+                                            dongName: apt.dongName,
+                                            jibun: apt.jibun,
+                                            dealAmount: apt.dealAmount,
+                                            lat: apt.lat,
+                                            lng: apt.lng,
+                                          },
+                                        }"
+                                      >
+                                        <img src="@/assets/images/apart/apart1.jpg" alt="#" />
+                                      </router-link>
                                       <i class="cross-badge lni lni-bolt"></i>
                                     </div>
                                   </div>
                                   <div class="col-lg-7 col-md-5 col-12">
                                     <div class="content">
                                       <h3 class="title">
-                                        <a
-                                          href="${root}/house/aptSearch?aptCode=${house.aptCode}&aptName=${house.aptName}&sidoName=${house.sidoName}&gugunName=${house.gugunName}&dongName=${house.dongName}&jibun=${house.jibun}&dealAmount=${house.dealAmount}&lat=${house.lat}&lng=${house.lng}"
-                                          >${house.aptName}</a
+                                        <router-link
+                                          :to="{
+                                            name: `aptDetail`,
+                                            query: {
+                                              aptCode: apt.aptCode,
+                                              aptName: apt.aptName,
+                                              sidoName: apt.sidoName,
+                                              gugunName: apt.gugunName,
+                                              dongName: apt.dongName,
+                                              jibun: apt.jibun,
+                                              dealAmount: apt.dealAmount,
+                                              lat: apt.lat,
+                                              lng: apt.lng,
+                                            },
+                                          }"
+                                          >{{ apt.aptName }}</router-link
                                         >
                                       </h3>
                                       <p class="location">
-                                        <a href="javascript:void(0)"
-                                          ><i class="lni lni-map-marker"> </i>${house.sidoName}
-                                          ${house.gugunName} ${house.dongName} ${house.jibun}</a
-                                        >
+                                        <a href="javascript:void(0)"><i class="lni lni-map-marker"> </i>{{ apt.sidoName }} {{ apt.gugunName }} {{ apt.dongName }} {{ apt.jibun }}</a>
                                       </p>
                                       <ul class="info">
                                         <li class="price">최근 거래가</li>
                                         <li class="like">
-                                          <a href="javascript:void(0)"
-                                            ><i class="lni lni-heart"></i
-                                          ></a>
+                                          <a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
                                         </li>
-                                        <li class="price me-1" style="float: right">
-                                          ${house.dealAmount} 만 원
-                                        </li>
+                                        <li class="price me-1" style="float: right">{{ apt.dealAmount }} 만 원</li>
                                       </ul>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </c:forEach> -->
-                          <!-- 리스트 반복문 종료 -->
+                          </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                           <div class="col-12">
                             <div class="pagination left">
                               <ul class="pagination-list">
-                              <c:set var = "curPgNo" value = "${pgNo}"></c:set>
-                              
-                              <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${(pgNo-10 > 0 ? pgNo-10 : 1)}">이전</a>
-                              
-                              <c:forEach var="pgIdx" begin="${(pgNo - (pgNo)%10) < 1 ? 1 : pgNo - (pgNo)%10}" end="${(pgNo - pgNo%10 + 9) > pgSize ? pgSize : (pgNo - pgNo%10 + 9)}" step="1">
-                                <c:choose>
-                                  <c:when test="${pgNo eq pgIdx}">
-                                    <li class="active"><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                  </c:when>
-                                  <c:otherwise>
-                                    <li><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:forEach>
-                              <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${((pgNo+10 > pgSize ? pgSize : pgNo+10 - pgNo%10) == 0 ? 1 : (pgNo+10 - pgNo%10))}">다음</a>
+                                <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${(pgNo-10 > 0 ? pgNo-10 : 1)}">이전</a>
+
+                                <div
+                                  v-for="(item, index) in items"
+                                  :key="index"
+                                  var="pgIdx"
+                                  begin="${(pgNo - (pgNo)%10) < 1 ? 1 : pgNo - (pgNo)%10}"
+                                  end="${(pgNo - pgNo%10 + 9) > pgSize ? pgSize : (pgNo - pgNo%10 + 9)}"
+                                  step="1"
+                                >
+                                  <c:choose>
+                                    <c:when test="${pgNo eq pgIdx}">
+                                      <li class="active"><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">{{}}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <li><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
+                                    </c:otherwise>
+                                  </c:choose>
+                                </div>
+                                <a
+                                  href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${((pgNo+10 > pgSize ? pgSize : pgNo+10 - pgNo%10) == 0 ? 1 : (pgNo+10 - pgNo%10))}"
+                                  >다음</a
+                                >
                               </ul>
                             </div>
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -210,11 +265,14 @@
 //       </div>
 //     </div>
 import SearchBox from '@/components/SearchBox.vue';
+import { mapState } from 'vuex';
+
 export default {
   data() {
-    return {
-      totalListSize: 0,
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(['apts', 'totalListSize', 'pgSize', 'pgno', 'start', 'end']),
   },
   components: {
     SearchBox,
