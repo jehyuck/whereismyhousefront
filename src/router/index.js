@@ -26,7 +26,29 @@ import QNADetailView from '@/components/qna/QNADetailView';
 import QNAModifyView from '@/components/qna/QNAModifyView';
 import QNARegistView from '@/components/qna/QNARegistView';
 
+import store from "@/store";
+
 Vue.use(VueRouter);
+
+const onlyAuthUser = async (to, from, next) => {
+  const checkUserInfo = store.getters["memberStore/checkUserInfo"];
+  const checkToken = store.getters["memberStore/checkToken"];
+  let token = sessionStorage.getItem("access-token");
+  console.log("로그인 처리 전", checkUserInfo, token);
+
+  if (checkUserInfo != null && token) {
+    console.log("토큰 유효성 체크하러 가자!!!!");
+    await store.dispatch("memberStore/getUserInfo", token);
+  }
+  if (!checkToken || checkUserInfo === null) {
+    alert("로그인이 필요한 페이지입니다..");
+    // next({ name: "login" });
+    router.push({ name: "login" });
+  } else {
+    console.log("로그인 했다!!!!!!!!!!!!!.");
+    next();
+  }
+};
 
 const routes = [
   {
@@ -52,22 +74,26 @@ const routes = [
   {
     path: '/mypage',
     name: 'mypage',
+    beforeEnter: onlyAuthUser,
     redirect: 'mypage/usermodify',
     component: MyPageView,
     children: [
       {
         path: 'usermodify',
         name: 'userModify',
+        beforeEnter: onlyAuthUser,
         component: UserModifyView,
       },
       {
         path: 'bookmark',
         name: 'Bookmark',
+        beforeEnter: onlyAuthUser,
         component: BookmarkView,
       },
       {
         path: 'withdrawal',
         name: 'withdrawal',
+        beforeEnter: onlyAuthUser,
         component: WithdrawalView,
       },
     ],
@@ -75,6 +101,7 @@ const routes = [
   {
     path: 'bookmarkdetail',
     name: 'bookmarkDetail',
+    beforeEnter: onlyAuthUser,
     component: BookmarkDetailView,
   },
   {
@@ -96,11 +123,13 @@ const routes = [
       {
         path: 'qnamodify',
         name: 'QNAModifyView',
+        beforeEnter: onlyAuthUser,
         component: QNAModifyView,
       },
       {
         path: 'qnaregist',
         name: 'QNARegistView',
+        beforeEnter: onlyAuthUser,
         component: QNARegistView,
       },
     ],
@@ -138,11 +167,13 @@ const routes = [
   {
     path: '/noticemodify',
     name: 'noticeModify',
+    beforeEnter: onlyAuthUser,
     component: NoticeModifyView,
   },
   {
     path: '/noticeinsert',
     name: 'noticeInsert',
+    beforeEnter: onlyAuthUser,
     component: NoticeInsertView,
   },
   {

@@ -140,7 +140,7 @@ export default {
       let err = false;
       let msg = '';
       !this.user.id && ((msg = '아이디를 입력해 주세요'), (err = true), this.$refs.id.focus());
-      !err && !this.idValid == false && ((msg = '아이디를 확인해주세요'), (err = true), this.$refs.id.focus());
+      !err && !this.idValid && ((msg = '아이디를 확인해주세요'), (err = true), this.$refs.id.focus());
       !err & !this.user.pass && ((msg = '비밀번호를 입력해주세요'), (err = true), this.$refs.pass.focus());
       !err & !this.user.name && ((msg = '이름을 입력해주세요'), (err = true), this.$refs.name.focus());
       !err & !this.user.address && ((msg = '이메일을 입력해주세요'), (err = true), this.$refs.address.focus());
@@ -164,76 +164,4 @@ export default {
   },
 };
 
-// 	 let isUseId = false;
-//      document.querySelector("#id").addEventListener("keyup", function () {
-//         let userid = this.value;
-//         let resultDiv = document.querySelector("#idcheck-result");
-//         if(userid.length < 5 || userid.length > 16) {
-//             resultDiv.setAttribute("class", "mb-3 text-dark");
-//             resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
-//             isUseId = false;
-//         } else {
-//            fetch("${root}/user/idCheck?userid=" + userid)
-//            .then(response => response.text())
-//            .then(data => {
-//                console.log(data);
-//                 if(data == 0) {
-//                   resultDiv.setAttribute("class", "mb-3 text-primary");
-//                   resultDiv.textContent = userid + "는 사용할 수 있습니다.";
-//                   isUseId = true;
-//                 } else {
-//                   resultDiv.setAttribute("class", "mb-3 text-danger");
-//                     resultDiv.textContent = userid + "는 사용할 수 없습니다.";
-//                     isUseId = false;
-//                 }
-//            });
-//     }
-//  });
-
-//    var $email = $("#hiddenForm input[name='id']");
-//    var $password = $("#hiddenForm input[name='pass']");
-//    var $name = $("#hiddenForm input[name='name']");
-//    var $address = $("#hiddenForm input[name='address']");
-//    var $phone = $("#hiddenForm input[name='phone']");
-
-//    //var rsa = new RSAKey();
-//    //rsa.setPublic("${modulus}", "${exponent}");
-
-//    $("#formRegist").submit(function(e) {
-// //     document.querySelector("#btn-join").addEventListener("click", function () {
-//            if (!document.querySelector("#name").value) {
-//              alert("이름 입력!!");
-//              return false;
-//            } else if (!document.querySelector("#id").value) {
-//              alert("아이디 입력!!");
-//              return false;
-//            } else if (!document.querySelector("#password").value) {
-//              alert("비밀번호 입력!!");
-//              return false;
-//            } else if (!isUseId) {
-//              alert("아이디 확인!!");
-//              return false;
-//            } else {
-//                // 실제 유저 입력 form은 event 취소
-//                // javascript가 작동되지 않는 환경에서는 유저 입력 form이 submit 됨
-//                // -> Server 측에서 검증되므로 로그인 불가
-//                e.preventDefault();
-
-//                // 아이디/비밀번호 암호화 후 hidden form으로 submit
-//                //var email = $(this).find("#id").val();
-//                //var password = $(this).find("#password").val();
-//                $email.val($(this).find("#id").val()); // 아이디 암호화
-//                $password.val($(this).find("#password").val()); // 비밀번호 암호화
-//                $name.val($(this).find("#name").val());
-//                $address.val($(this).find("#address").val());
-//                $phone.val($(this).find("#phone").val());
-
-//                $("#hiddenForm").submit();
-
-// //             let form = document.querySelector("#formRegist");
-// //             form.setAttribute("action", "${root}/regist.user");
-// //             form.setAttribute("method", "post");
-// //             form.submit();
-//        }
-//      });
 </script>
