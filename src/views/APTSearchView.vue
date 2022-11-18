@@ -209,13 +209,14 @@
                             </div>
                           </div>
                         </div>
+                        <input type="text" readonly v-model="searchPgno">
                         <div class="row">
                           <div class="col-12">
                             <div class="pagination left">
                               <ul class="pagination-list">
                                 <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${(pgNo-10 > 0 ? pgNo-10 : 1)}">이전</a>
 
-                                <div v-for="(item, index) in list" :key="index">
+                                <li v-for="item in pageList" :key="item" @click="setPage($event)">
                                   {{ item }}
                                   <!-- <c:choose>
                                     <c:when test="${pgNo eq pgIdx}">
@@ -225,7 +226,7 @@
                                       <li><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
                                     </c:otherwise>
                                   </c:choose> -->
-                                </div>
+                                </li>
                                 <a
                                   href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${((pgNo+10 > pgSize ? pgSize : pgNo+10 - pgNo%10) == 0 ? 1 : (pgNo+10 - pgNo%10))}"
                                   >다음</a
@@ -259,36 +260,30 @@
 //       </div>
 //     </div>
 import SearchBox from '@/components/SearchBox.vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   data() {
     return {
-      list: [],
     };
   },
   computed: {
-    ...mapState(['apts', 'totalListSize', 'pgSize', 'pgno', 'start', 'end']),
+    ...mapState(['apts', 'totalListSize', 'pgSize', 'searchPgno', 'start', 'end', "pageList", "searchPgno"]),
   },
   components: {
     SearchBox,
   },
+  created() {
+    // console.log(this.pageList);
+  },
   methods: {
-    range(start, end) {
-      var arr = [];
-
-      var length = end - start;
-
-      for (var i = 0; i <= length; i++) {
-        arr[i] = start;
-        start++;
-      }
-
-      return arr;
-    },
-    makeList() {
-      this.list = this.range(this.start, this.end);
-    },
+    ...mapActions(['setStartEnd']),
+    
+    setPage(event) {
+      // console.log(this.pageList);
+      // console.log(event.currentTarget.innerText)
+      this.setStartEnd(event.currentTarget.innerText);
+    }
   },
 };
 </script>
