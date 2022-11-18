@@ -93,38 +93,34 @@
             <!-- navbar collapse -->
             <div class="login-button">
               <ul>
-                <c:choose>
-                  <c:when test="${empty userInfo}">
+                  <div v-if="!userInfo">
                     <li>
                       <router-link to="/login"><i class="lni lni-enter"></i> 로그인</router-link>
                     </li>
                     <li>
                       <router-link to="/regist"><i class="lni lni-user"></i> 회원가입</router-link>
                     </li>
-                  </c:when>
-                  <c:otherwise>
-                    <c:choose>
-                      <c:when test="${userInfo.id eq 'admin'}">
+                  </div>
+                  <div v-else>
+                      <div v-if="userInfo.id=='admin'">
                         <li>
                           <router-link to="/noticelist"><i class="lni lni-user"></i> 공지사항 관리</router-link>
                         </li>
                         <li>
                           <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
-                          <a href="/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
+                          <div @click.prevent="onClickLogout"><i class="lni lni-user"></i> 로그아웃</div>
                         </li>
-                      </c:when>
-                      <c:otherwise>
+                      </div>
+                      <div v-else>
                         <li>
                           <router-link to="/mypage"><i class="lni lni-user"></i> 회원정보</router-link>
                         </li>
                         <li>
                           <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
-                          <a href="/user/logout"><i class="lni lni-user"></i> 로그아웃</a>
+                          <div @click.prevent="onClickLogout"><i class="lni lni-user"></i> 로그아웃</div>
                         </li>
-                      </c:otherwise>
-                    </c:choose>
-                  </c:otherwise>
-                </c:choose>
+                      </div>
+                  </div>
               </ul>
             </div>
           </nav>
@@ -135,5 +131,46 @@
     <!-- row -->
   </div>
 </template>
+
+
+<script>
+import { mapState, mapGetters, mapActions } from "vuex";
+
+const userStore = "userStore";
+
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(userStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+  },
+  mounted() {
+    console.log(this.userInfo);
+    console.log(this.isLogin)
+
+  },
+  methods: {
+    ...mapActions(userStore, ["userLogout"]),
+    // ...mapMutations(userStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+    async onClickLogout() {
+      // this.SET_IS_LOGIN(false);
+      // this.SET_USER_INFO(null);
+      // sessionStorage.removeItem("access-token");
+      // if (this.$route.path != "/") this.$router.push({ name: "main" });
+      console.log(this.userInfo.id);
+      //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+      //+ satate에 isLogin, userInfo 정보 변경)
+      // this.$store.dispatch("userLogout", this.userInfo.userid);
+      await this.userLogout(this.userInfo.id);
+      await sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+      await sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+
+      if (this.$route.path != "/") this.$router.push({ name: "home" });
+    },
+  },
+};
+</script>
 
 <style></style>

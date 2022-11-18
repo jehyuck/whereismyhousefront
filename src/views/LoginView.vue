@@ -9,24 +9,6 @@
       </div>
     </div>
 
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6 col-12">
-            <div class="breadcrumbs-content">
-              <h1 class="page-title">로그인</h1>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-12">
-            <ul class="breadcrumb-nav">
-              <li><a href="${root}/index">Home</a></li>
-              <li>Login</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- 메인 섹션 START -->
     <div class="breadcrumbs">
       <div class="container">
@@ -52,33 +34,33 @@
           <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
             <div class="form-head">
               <!-- 아이디 기억하기 start -->
-              <c:set var="checked" value="" />
+              <!-- <c:set var="checked" value="" />
               <c:set var="id" value="" />
               <c:if test="${!empty cookie.id}">
                 <c:set var="checked" value="checked='checked'" />
                 <c:set var="id" value="value='${cookie.id.value}'"></c:set>
-              </c:if>
+              </c:if> -->
               <!-- 아이디 기억하기 end -->
               <h4 class="title">로그인</h4>
-              <form action="${root}/user/login" method="post" id="loginForm">
+              <form @click="loginHandler" id="loginForm">
                 <div class="form-group">
                   <label for="id">아이디</label>
-                  <input type="text" class="form-control" name="id" id="id" ${id} placeholder="아이디 입력" />
+                  <input v-model="user.id" type="text" class="form-control" name="id" id="id" placeholder="아이디 입력" />
                 </div>
                 <div class="form-group">
                   <label for="password">비밀번호</label>
-                  <input type="password" name="pass" class="form-control" id="password" placeholder="비밀번호 입력" />
+                  <input v-model="user.pass" type="password" name="pass" class="form-control" id="password" placeholder="비밀번호 입력" />
                 </div>
                 <div class="check-and-pass">
                   <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
-                      <div class="form-check">
+                      <!-- <div class="form-check">
                         <input name="idsave" value="true" ${checked} type="checkbox" class="form-check-input width-auto" id="idsave" />
                         <label class="form-check-label">아이디 저장</label>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                      <a href="${root}/user/find" class="lost-pass">비밀번호 찾기</a>
+                      <router-link to="/find" class="lost-pass">비밀번호 찾기</router-link>
                     </div>
                   </div>
                 </div>
@@ -100,17 +82,19 @@
                 </div>
                 <p class="outer-link">
                   계정이 없으신가요?
-                  <a href="${root}/user/regist">회원가입</a>
+                  <router-link to="/regist">회원가입</router-link>
                 </p>
+              <!-- <alert show variant="danger" v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</alert> -->
               </form>
+            
 
               <!-- 실제 서버로 전송되는 form -->
-              <form action="${root}/user/login" method="post" id="hiddenForm">
+              <!-- <form action="${root}/user/login" method="post" id="hiddenForm">
                 <fieldset>
                   <input type="hidden" name="id" />
                   <input type="hidden" name="password" />
                 </fieldset>
-              </form>
+              </form> -->
             </div>
           </div>
         </div>
@@ -121,14 +105,44 @@
 </template>
 
 <script>
-// import http from '@/api/http';
-export default {
-  data() {
-    return {};
-  },
+import { mapState, mapActions } from "vuex";
+const userStore = "userStore";
 
+export default {
+  // name:"loginView",
+  data() {
+    return {
+      // isLoginError: false,
+      user: {
+        id: null,
+        pass: null,
+      },
+    };
+  },
+  computed: {
+    ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
+  },
+  // created() {
+  //   console.log(this.isLogin);
+  // },
   methods: {
-    goDetail() {},
+    moveHandler() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+    async loginHandler() {
+      await this.userConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
+      // console.log("1. confirm() token >> " + token);
+      if (this.isLogin) {
+        await this.getUserInfo(token);
+        // console.log("4. confirm() userInfo :: ", this.userInfo);
+        // this.moveHandler();
+        await this.$router.push({ name: "home" });
+      }
+    },
   },
 };
 </script>

@@ -1,14 +1,12 @@
-import { apiInstance } from "./index.js";
-
-const api = apiInstance();
+import api from "@/api/http"
 
 async function login(user, success, fail) {
-  await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
+  await api.post("/user/login", user).then(success).catch(fail);
 }
 
-async function findById(userid, success, fail) {
+async function findById(id, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
-  await api.get(`/user/info/${userid}`).then(success).catch(fail);
+  await api.get(`/user/info/${id}`).then(success).catch(fail);
 }
 
 async function tokenRegeneration(user, success, fail) {
@@ -16,8 +14,8 @@ async function tokenRegeneration(user, success, fail) {
   await api.post(`/user/refresh`, user).then(success).catch(fail);
 }
 
-async function logout(userid, success, fail) {
-  await api.get(`/user/logout/${userid}`).then(success).catch(fail);
+async function logout(id, success, fail) {
+  await api.get(`/user/logout/${id}`).then(success).catch(fail);
 }
 
 export { login, findById, tokenRegeneration, logout };

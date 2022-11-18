@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import router from "@/router";
 import { login, findById, tokenRegeneration, logout } from "@/api/user";
 
-const memberStore = {
+const userStore = {
   namespaced: true,
   state: {
     isLogin: false,
@@ -29,7 +29,7 @@ const memberStore = {
       state.isValidToken = isValidToken;
     },
     SET_USER_INFO: (state, userInfo) => {
-      state.isLogin = true;
+      // state.isLogin = true;
       state.userInfo = userInfo;
     },
   },
@@ -62,7 +62,7 @@ const memberStore = {
       let decodeToken = jwtDecode(token);
       // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
       await findById(
-        decodeToken.userid,
+        decodeToken.id,
         ({ data }) => {
           if (data.message === "success") {
             commit("SET_USER_INFO", data.userInfo);
@@ -79,13 +79,13 @@ const memberStore = {
       );
     },
     async tokenRegeneration({ commit, state }) {
-      console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
+      // console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
       await tokenRegeneration(
         JSON.stringify(state.userInfo),
         ({ data }) => {
           if (data.message === "success") {
             let accessToken = data["access-token"];
-            console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
+            // console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
             sessionStorage.setItem("access-token", accessToken);
             commit("SET_IS_VALID_TOKEN", true);
           }
@@ -96,7 +96,7 @@ const memberStore = {
             console.log("갱신 실패");
             // 다시 로그인 전 DB에 저장된 RefreshToken 제거.
             await logout(
-              state.userInfo.userid,
+              state.userInfo.id,
               ({ data }) => {
                 if (data.message === "success") {
                   console.log("리프레시 토큰 제거 성공");
@@ -119,11 +119,12 @@ const memberStore = {
         }
       );
     },
-    async userLogout({ commit }, userid) {
+    async userLogout({ commit }, id) {
       await logout(
-        userid,
+        id,
         ({ data }) => {
           if (data.message === "success") {
+            // console.log("로그아웃 완료!!!!!")
             commit("SET_IS_LOGIN", false);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
@@ -139,4 +140,4 @@ const memberStore = {
   },
 };
 
-export default memberStore;
+export default userStore;
