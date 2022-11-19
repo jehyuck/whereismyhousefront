@@ -209,14 +209,14 @@
                             </div>
                           </div>
                         </div>
-                        <input type="text" readonly v-model="searchPgno">
+                        <!-- <input type="text" readonly v-model="searchPgno"> -->
                         <div class="row">
                           <div class="col-12">
-                            <div class="pagination left">
+                            <div class="pagination center">
                               <ul class="pagination-list">
-                                <a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${(pgNo-10 > 0 ? pgNo-10 : 1)}">이전</a>
+                                <li class="btn btn-primary" @click="prePage">이전</li>
 
-                                <li v-for="item in pageList" :key="item" @click="setPage($event)">
+                                <li class="btn btn-primary" v-for="item in pageList" :key="item" @click="setPage($event)">
                                   {{ item }}
                                   <!-- <c:choose>
                                     <c:when test="${pgNo eq pgIdx}">
@@ -227,10 +227,7 @@
                                     </c:otherwise>
                                   </c:choose> -->
                                 </li>
-                                <a
-                                  href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${((pgNo+10 > pgSize ? pgSize : pgNo+10 - pgNo%10) == 0 ? 1 : (pgNo+10 - pgNo%10))}"
-                                  >다음</a
-                                >
+                                <li class="btn btn-primary" @click="nextPage">다음</li>
                               </ul>
                             </div>
                           </div>
@@ -277,12 +274,22 @@ export default {
     // console.log(this.pageList);
   },
   methods: {
-    ...mapActions(['setStartEnd']),
+    ...mapActions(['setStartEnd', "moveStartEnd"]),
     
     setPage(event) {
       // console.log(this.pageList);
       // console.log(event.currentTarget.innerText)
       this.setStartEnd(event.currentTarget.innerText);
+    },
+    prePage() {
+      if (this.start > 10) {
+        this.moveStartEnd(-10);
+      }
+    },
+    nextPage() {
+      if (this.start + 10 < this.pgSize) {
+        this.moveStartEnd(10);
+      }
     }
   },
 };
