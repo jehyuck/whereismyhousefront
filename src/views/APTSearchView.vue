@@ -248,14 +248,6 @@
 </template>
 
 <script>
-// <div class="preloader">
-//       <div class="preloader-inner">
-//         <div class="preloader-icon">
-//           <span></span>
-//           <span></span>
-//         </div>
-//       </div>
-//     </div>
 import SearchBox from '@/components/SearchBox.vue';
 import { mapState, mapActions } from 'vuex';
 

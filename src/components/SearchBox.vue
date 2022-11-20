@@ -70,6 +70,7 @@ export default {
     };
   },
   created() {
+    // console.log(this.$route)
     this.sendRequest('sido', '*00000000');
   },
   methods: {
@@ -109,6 +110,7 @@ export default {
     },
     getAptDatas() {
       this.getAptData({ sido: this.sido, gugun: this.gugun, dong: this.dong, pgno: this.pgno, word: this.word });
+      if (this.$route.fullPath == "/") this.$router.push({name:"aptSearch"})
     },
     sendRequest(selid, regcode) {
       const url = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes';
@@ -123,14 +125,14 @@ export default {
         case 'gugun':
           params = 'regcode_pattern=' + regcode + '&is_ignore_zero=true';
           axios(`${url}?${params}`).then(({ data }) => {
-            console.log(data);
+            // console.log(data);
             this.addGuGun(data, this.gugunList);
           });
           break;
         case 'dong':
           params = 'regcode_pattern=' + regcode + '&is_ignore_zero=true';
           axios(`${url}?${params}`).then(({ data }) => {
-            console.log(data);
+            // console.log(data);
             this.addDong(data, this.dongList);
           });
           break;
