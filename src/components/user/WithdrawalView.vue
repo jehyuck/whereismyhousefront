@@ -1,130 +1,126 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-          target="_blank"
-          rel="noopener"
-          >router</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-          target="_blank"
-          rel="noopener"
-          >vuex</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+<div>
+
+    <div class="preloader" style="opacity: 0; display: none">
+      <div class="preloader-inner">
+        <div class="preloader-icon">
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 col-12">
+            <div class="breadcrumbs-content">
+              <h1 class="page-title">회원 탈퇴</h1>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <ul class="breadcrumb-nav">
+              <li>
+                <a href="${root}/index">Home</a>
+              </li>
+              <li>Close Account</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="dashboard section">
+      <div class="container">
+        <div class="row">
+
+          <!-- 사이드바 -->
+          <div class="col-lg-3 col-md-4 col-12">
+            <div class="dashboard-sidebar">
+              <div class="user-image">
+                <img src="@/assets/images/items-grid/author-1.jpg" alt="#" />
+                <h3>
+                  {{userInfo.name}}
+                  <span><a href="javascript:void(0)">@{{userInfo.id}}</a></span>
+                </h3>
+              </div>
+              <div class="dashboard-menu">
+                <ul>
+                  <li>
+                    <router-link to="/mypage"
+                      ><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link
+                    >
+                  </li>
+                  <li>
+                    <router-link to="/mypage/bookmark">
+                      <i class="lni lni-bookmark"></i>관심 지역 조회
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/mypage/withdrawal" class="active"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
+                  </li>
+                </ul>
+                <div class="button">
+                  <a class="btn" href="${root}/user/logout">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 사이드바 END -->
+
+          <!-- 회원 탈퇴 -->
+          <div class="col-lg-9 col-md-8 col-12">
+            <div class="main-content">
+              <div class="dashboard-block close-content mt-0">
+                <h2>회원 탈퇴</h2>
+                <h4>이 작업은 되돌릴 수 없습니다. 정말 회원탈퇴 하시겠습니까?</h4>
+                <div class="button">
+                  <button class="btn" @click="withdrawalHandler" type="submit">탈퇴</button>
+                  <router-link to="/mypage" class="btn btn-alt">취소</router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 회원 탈퇴 END -->
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 
 <script>
+import http from '@/api/http';
+
+import { mapState, mapActions } from "vuex";
+const userStore = "userStore";
+
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+  computed: {
+    ...mapState(userStore, ["userInfo"])
+  },
+  methods: {
+    ...mapActions(userStore, ["userLogout"]),
+    moveHandler() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+    withdrawalHandler() {
+        http.delete(`user/remove/${this.userInfo.id}`).then(({ data }) => {
+        if (data == 'success') {
+            this.userLogout(this.userInfo.id);
+            sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+            sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+            alert('회원탈퇴 완료');
+            this.$router.push({name: 'home',});
+        }
+        else{
+          alert('다시 시도해주세요')
+        }
+        })
+    }
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

@@ -81,7 +81,7 @@
                     >My Page</a
                   >
                   <ul class="sub-menu collapse" id="submenu-1-5">
-                    <li class="nav-item"><router-link to="/bookmark/selectAll">나의 관심 지역</router-link></li>
+                    <li class="nav-item"><router-link to="mypage/bookmark">나의 관심 지역</router-link></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -117,7 +117,7 @@
                         </li>
                         <li>
                           <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
-                          <div @click.prevent="onClickLogout"><i class="lni lni-user"></i> 로그아웃</div>
+                          <div @click.prevent="logoutHandler"><i class="lni lni-user"></i> 로그아웃</div>
                         </li>
                       </div>
                   </div>
@@ -135,7 +135,6 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-
 const userStore = "userStore";
 
 export default {
@@ -149,12 +148,11 @@ export default {
   mounted() {
     console.log(this.userInfo);
     console.log(this.isLogin)
-
   },
   methods: {
     ...mapActions(userStore, ["userLogout"]),
     // ...mapMutations(userStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
-    async onClickLogout() {
+    async logoutHandler() {
       // this.SET_IS_LOGIN(false);
       // this.SET_USER_INFO(null);
       // sessionStorage.removeItem("access-token");
@@ -163,9 +161,9 @@ export default {
       //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
       //+ satate에 isLogin, userInfo 정보 변경)
       // this.$store.dispatch("userLogout", this.userInfo.userid);
-      await this.userLogout(this.userInfo.id);
       await sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       await sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+      await this.userLogout(this.userInfo.id);
 
       if (this.$route.path != "/") this.$router.push({ name: "home" });
     },

@@ -42,7 +42,7 @@
               </c:if> -->
               <!-- 아이디 기억하기 end -->
               <h4 class="title">로그인</h4>
-              <form @click="loginHandler" id="loginForm">
+              <form @submit.prevent="loginHandler" id="loginForm">
                 <div class="form-group">
                   <label for="id">아이디</label>
                   <input v-model="user.id" type="text" class="form-control" name="id" id="id" placeholder="아이디 입력" />
@@ -139,8 +139,7 @@ export default {
       if (this.isLogin) {
         await this.getUserInfo(token);
         // console.log("4. confirm() userInfo :: ", this.userInfo);
-        // this.moveHandler();
-        await this.$router.push({ name: "home" });
+        this.moveHandler();
       }
     },
   },

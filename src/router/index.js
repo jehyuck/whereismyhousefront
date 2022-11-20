@@ -89,6 +89,7 @@ const routes = [
         name: 'Bookmark',
         beforeEnter: onlyAuthUser,
         component: BookmarkView,
+        props:true,
       },
       {
         path: 'withdrawal',
