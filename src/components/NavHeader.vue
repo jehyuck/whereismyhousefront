@@ -78,10 +78,10 @@
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
-                    >My Page</router-link
-                  >
+                    >My Page
+                  </router-link>
                   <ul class="sub-menu collapse" id="submenu-1-5">
-                    <li class="nav-item"><router-link to="mypage/bookmark">나의 관심 지역</router-link></li>
+                    <li class="nav-item"><router-link :to="{ name: 'Bookmark' }">나의 관심 지역</router-link></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 const userStore = 'userStore';
 
 export default {
@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     ...mapState(userStore, ['isLogin', 'userInfo']),
-    ...mapGetters(['checkUserInfo']),
+    // ...mapGetters(['checkUserInfo']),
   },
   mounted() {
     console.log(this.userInfo);
