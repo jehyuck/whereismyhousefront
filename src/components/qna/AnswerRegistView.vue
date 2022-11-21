@@ -29,11 +29,11 @@
 import http from '@/api/http';
 
 export default {
-  props: ['propsQnaNo', 'propsAnswer'],
+  props: ['propsAnswer'],
   data() {
     return {
       qna: {
-        qnaNo: this.propsQnaNo,
+        qnaNo: '',
         title: '',
         userId: '',
         price: '',
@@ -45,7 +45,8 @@ export default {
   created() {
     //DOM객체와 연결되었고 Vue의 속성들도 초기화 된 상태
     this.qna.answer = this.propsAnswer;
-    this.qna.qnaNo = this.propsQnaNo;
+    console.log(this.propsQnaNo, this.$route.query.qnaNo);
+    this.qna.qnaNo = this.$route.query.qnaNo;
     console.log('view.html..................qnaNo]', this.propsAnswer);
   },
   methods: {
@@ -63,7 +64,8 @@ export default {
         alert(msg);
       } else {
         //수정하기
-        http.put('qna/answer', { qnaNo: this.qna.qnaNo, answer: this.qna.answer }).then(({ data }) => {
+        console.log({ qnaNo: this.qna.qnaNo, answer: this.qna.answer });
+        http.put('/qna/answer', { qnaNo: this.qna.qnaNo, answer: this.qna.answer }).then(({ data }) => {
           if (data == 'success') {
             alert('등록성공');
             this.moveHandler();

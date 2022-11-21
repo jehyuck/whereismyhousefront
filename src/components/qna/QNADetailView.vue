@@ -33,22 +33,24 @@
           <div>
             <button class="btn btn-primary m-2" @click="moveHandler">목록</button>
             <router-link :to="{ name: 'QNAModifyView', query: { qnaNo: qna.qnaNo } }">
-              <b-button variant="primary m-2">수정</b-button>
+              <b-button v-if="qna.userId == this.userInfo.id" variant="primary m-2">수정</b-button>
             </router-link>
-            <b-button variant="primary m-2" @click="removeHandler">삭제</b-button>
+            <b-button v-if="qna.userId == this.userInfo.id || !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary m-2" @click="removeHandler">삭제</b-button>
           </div>
         </td>
       </tr>
     </table>
     <div>
-      <AnswerRegistView v-if="qna.qnaNo != null" :propsQnaNo="qna.qnaNo" :propsAnswer="qna.answer"></AnswerRegistView>
+      <AnswerRegistView v-if="qna.qnaNo != null && ['admin', 'ssafy'].includes(this.userInfo.id)" :propsAnswer="qna.answer"></AnswerRegistView>
     </div>
   </div>
 </template>
 
 <script>
 import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import AnswerRegistView from '@/components/qna/AnswerRegistView';
+const userStore = 'userStore';
 
 export default {
   data() {
@@ -56,6 +58,10 @@ export default {
       qnaNo: '',
       qna: {},
     };
+  },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
   },
   components: {
     AnswerRegistView,
@@ -72,6 +78,7 @@ export default {
     // });
   },
   methods: {
+    ...mapActions(userStore, ['userLogout']),
     moveHandler() {
       this.$router.push({ name: 'QNAListView' });
     },

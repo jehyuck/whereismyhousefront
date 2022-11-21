@@ -17,13 +17,15 @@
     <div>
       <b-table hover striped :items="qnas" :fields="fields" @row-clicked="goDetail"> </b-table>
     </div>
-    <b-button variant="primary" @click="registQNA">질문 등록 </b-button>
+    <b-button v-if="this.userInfo.id && !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary" @click="registQNA">질문 등록 </b-button>
     <!-- <div v-else>등록된 책 목록이 없습니다.</div> -->
   </div>
 </template>
 
 <script>
 import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   data() {
@@ -45,10 +47,16 @@ export default {
       key: 'all',
     };
   },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
   created() {
+    console.log(this.userInfo);
     this.searchQNA();
   },
   methods: {
+    ...mapActions(userStore, ['userLogout']),
     searchQNA() {
       console.log('key.......', this.key);
       const url = `qna?key=${this.key}&pageNo=1&word=${this.word}`;

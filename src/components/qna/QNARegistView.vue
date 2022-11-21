@@ -35,24 +35,32 @@
 
 <script>
 import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   data() {
     return {
       qna: {
         title: '',
-        userId: '제혁',
+        userId: '',
         price: '',
         content: '',
       },
     };
   },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
   created() {
     //DOM객체와 연결되었고 Vue의 속성들도 초기화 된 상태
+    this.qna.userId = this.userInfo.id;
     console.log('view.html..................qnaNo]', this.qnaNo);
   },
 
   methods: {
+    ...mapActions(userStore, ['userLogout']),
     moveHandler() {
       this.$router.push({
         name: 'QNAListView',
