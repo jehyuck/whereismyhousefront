@@ -1,13 +1,15 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import vueCookies from 'vue-cookies';
+
 // import select from "@/assets/js/selectbox-search.js"
 
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
-import { BootstrapVue, IconsPlugin  } from 'bootstrap-vue';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 // import "@/assets/js/.min.js";
 // import jsbn from "@/assets/js/jsbn"
 // import jsbn from "@/assets/js/"
@@ -18,6 +20,9 @@ require('@/assets/css/animate.css');
 require('@/assets/css/tiny-slider.css');
 require('@/assets/css/glightbox.min.css');
 require('@/assets/css/main.css');
+
+Vue.use(vueCookies);
+Vue.$cookies.config('7d');
 
 // Vue.use(jsbn);
 Vue.use(BootstrapVue);
@@ -30,4 +35,4 @@ new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount("#app");
+}).$mount('#app');

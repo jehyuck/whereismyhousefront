@@ -110,6 +110,7 @@ export default {
       },
     };
   },
+  //watch? computed? updated? 뭘로 하는게 좋을까? 고민
   watch: {
     'user.id': function (inputId) {
       let minLength = 5;
@@ -117,11 +118,11 @@ export default {
       if (inputId.length < minLength || inputId.length > maxLength) {
         this.idMsg = `아이디는 ${minLength}자 이상 ${maxLength}자 이하 입니다.`;
       } else {
-        http.get(`user/idCheck?userid=${this.user.id}`).then(({ data }) => {
+        http.get(`user/idCheck?id=${this.user.id}`).then(({ data }) => {
           //data: userid 개수
           if (data == 0) {
-            this.idMsg = inputId + '는 사용할 수 있습니다.';
             this.idValid = true;
+            this.idMsg = inputId + '는 사용할 수 있습니다.';
           } else {
             this.idMsg = inputId + '는 사용할 수 없습니다.';
           }
@@ -163,5 +164,4 @@ export default {
     },
   },
 };
-
 </script>

@@ -54,13 +54,13 @@
                 <div class="check-and-pass">
                   <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
-                      <!-- <div class="form-check">
-                        <input name="idsave" value="true" ${checked} type="checkbox" class="form-check-input width-auto" id="idsave" />
+                      <div class="form-check">
+                        <input @click="idsaveHandler" :checked="idsave" name="idsave" value="true" type="checkbox" class="form-check-input width-auto" id="idsave" />
                         <label class="form-check-label">아이디 저장</label>
-                      </div> -->
+                      </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                      <router-link to="/find" class="lost-pass">비밀번호 찾기</router-link>
+                      <router-link to="/findpassword" class="lost-pass">비밀번호 찾기</router-link>
                     </div>
                   </div>
                 </div>
@@ -84,9 +84,8 @@
                   계정이 없으신가요?
                   <router-link to="/regist">회원가입</router-link>
                 </p>
-              <!-- <alert show variant="danger" v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</alert> -->
+                <!-- <alert show variant="danger" v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</alert> -->
               </form>
-            
 
               <!-- 실제 서버로 전송되는 form -->
               <!-- <form action="${root}/user/login" method="post" id="hiddenForm">
@@ -105,22 +104,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-const userStore = "userStore";
+import { mapState, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   // name:"loginView",
   data() {
     return {
       // isLoginError: false,
+      // key값(=idCookie)에 해당하는 쿠키를 가져온다.
+      idsave: this.$cookies.get('idsave'),
       user: {
-        id: null,
+        id: this.$cookies.get('idCookie'),
         pass: null,
       },
     };
   },
   computed: {
-    ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
+    ...mapState(userStore, ['isLogin', 'isLoginError', 'userInfo']),
   },
   // created() {
   //   console.log(this.isLogin);
@@ -131,16 +132,34 @@ export default {
         name: 'home',
       });
     },
-    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+    created() {
+      this.idsave = this.$cookies.get('idsave');
+      if (this.idsave) {
+        this.user.id = this.$cookies.get('idCookie');
+      }
+    },
+    ...mapActions(userStore, ['userConfirm', 'getUserInfo']),
     async loginHandler() {
       await this.userConfirm(this.user);
-      let token = sessionStorage.getItem("access-token");
+      let token = sessionStorage.getItem('access-token');
       // console.log("1. confirm() token >> " + token);
       if (this.isLogin) {
         await this.getUserInfo(token);
         // console.log("4. confirm() userInfo :: ", this.userInfo);
         this.moveHandler();
       }
+      //idsave 관련 로직
+      if (this.idsave) {
+        console.log('id = ' + this.user.id);
+        this.$cookies.set('idCookie', this.user.id);
+        this.$cookies.set('idsave', true);
+      } else {
+        this.$cookies.remove('idCookie');
+        this.$cookies.remove('idsave');
+      }
+    },
+    idsaveHandler() {
+      this.idsave = !this.idsave;
     },
   },
 };
