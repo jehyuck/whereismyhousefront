@@ -73,9 +73,6 @@ export default {
     http.get(`qna/${this.qnaNo}`).then(({ data }) => {
       this.qna = data;
     });
-    // .catch(({ data }) => {
-    //   alert(data);
-    // });
   },
   methods: {
     ...mapActions(userStore, ['userLogout']),
@@ -90,9 +87,6 @@ export default {
           this.moveHandler();
         }
       });
-      // .catch(({ data }) => {
-      //   alert(data);
-      // });
     },
   },
 };

@@ -41,7 +41,6 @@
             </div>
           </div>
         </div>
-
         <!-- End Search Form -->
       </div>
     </div>
@@ -51,9 +50,9 @@
 
 <script>
 import axios from 'axios';
-// import http from '@/api/http';
 import { mapState, mapGetters, mapActions } from 'vuex';
 const userStore = 'userStore';
+const searchStore = 'searchStore';
 
 export default {
   name: 'searchBox',
@@ -75,11 +74,10 @@ export default {
     ...mapGetters(['checkUserInfo']),
   },
   created() {
-    // console.log(this.$route)
     this.sendRequest('sido', '*00000000');
   },
   methods: {
-    ...mapActions(['getAptData']),
+    ...mapActions(searchStore, ['getAptData']),
     ...mapActions(userStore, ['userLogout']),
     setSido(dataa, sido) {
       dataa.regcodes.forEach(function (regcode) {
@@ -93,7 +91,7 @@ export default {
     },
     addGuGun(dataa, gugun) {
       dataa.regcodes.forEach(function (regcode) {
-        gugun.push({ name: regcode.name.split(' ')[1], value: regcode.code });
+        gugun.push({ name: regcode.name.split(' ').pop(), value: regcode.code });
       });
     },
     setDong() {
@@ -103,7 +101,7 @@ export default {
     },
     addDong(dataa, dong) {
       dataa.regcodes.forEach(function (regcode) {
-        dong.push({ name: regcode.name.split(' ')[2], value: regcode.code });
+        dong.push({ name: regcode.name.split(' ').pop(), value: regcode.code });
       });
     },
     initGuGun() {
@@ -115,10 +113,6 @@ export default {
       this.dong = '';
     },
     getAptDatas() {
-      // if (!this.isLogin) {
-      //   alert('로그인 해주세요');
-      //   this.$router.push({ name: 'login' });
-      // }
       this.getAptData({ sido: this.sido, gugun: this.gugun, dong: this.dong, pgno: this.pgno, word: this.word });
       if (this.$route.fullPath == '/') this.$router.push({ name: 'aptSearch' });
     },
@@ -135,14 +129,13 @@ export default {
         case 'gugun':
           params = 'regcode_pattern=' + regcode + '&is_ignore_zero=true';
           axios(`${url}?${params}`).then(({ data }) => {
-            // console.log(data);
+            console.log(data);
             this.addGuGun(data, this.gugunList);
           });
           break;
         case 'dong':
           params = 'regcode_pattern=' + regcode + '&is_ignore_zero=true';
           axios(`${url}?${params}`).then(({ data }) => {
-            // console.log(data);
             this.addDong(data, this.dongList);
           });
           break;

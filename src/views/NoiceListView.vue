@@ -83,8 +83,6 @@
                             <div class="action-btn">
                               <router-link v-if="this.isLogin && ['admin', 'ssafy'].includes(this.userInfo.id)" :to="{ name: 'noticeInsert' }"><i class="lni lni-plus"></i></router-link>
                             </div>
-                            <!-- <c:if test="${not empty userInfo and userInfo.id eq 'admin'}">
-                            </c:if> -->
                           </div>
                         </div>
 
@@ -111,9 +109,6 @@
 
                           <!-- start of list -->
                           <notice-item v-for="(item, index) in this.notices" :key="index" :notice="item"></notice-item>
-                          <!-- <c:forEach items="${notices}" var="notice">
-                          </c:forEach> -->
-                          <!-- end of list -->
                         </div>
                       </div>
                     </div>

@@ -225,7 +225,6 @@
               </div>
             </div>
             <!-- 검색 창 -->
-            <!-- house-info Start-->
           </div>
         </div>
       </div>
@@ -236,20 +235,21 @@
 <script>
 import SearchBox from '@/components/SearchBox.vue';
 import { mapState, mapActions } from 'vuex';
+const searchStore = 'searchStore';
 
 export default {
   data() {
     return {};
   },
   computed: {
-    ...mapState(['apts', 'totalListSize', 'pgSize', 'searchPgno', 'start', 'end', 'pageList', 'searchPgno']),
+    ...mapState(searchStore, ['apts', 'totalListSize', 'pgSize', 'searchPgno', 'start', 'end', 'pageList', 'searchPgno']),
   },
   components: {
     SearchBox,
   },
   created() {},
   methods: {
-    ...mapActions(['setStartEnd', 'moveStartEnd']),
+    ...mapActions(searchStore, ['setStartEnd', 'moveStartEnd']),
 
     setPage(event) {
       this.setStartEnd(event.currentTarget.innerText);

@@ -26,40 +26,7 @@
             <div class="col-lg-6 col-md-12 col-12">
               <div class="product-images">
                 <main id="gallery">
-                  <!-- <map-view-vue></map-view-vue> -->
-                  <!-- kakao map start -->
                   <div id="map" style="width: 100%; height: 700px"></div>
-                  <!-- <script
-                    type="text/javascript"
-                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86fe11c6c628248e5e1d06dca421c602"
-                  ></script>
-                  <script>
-                    var lat = `${houseInfo.lat}`,
-                      lng = `${houseInfo.lng}`;
-                    var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-                      mapOption = {
-                        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-                        level: 3, // 지도의 확대 레벨
-                      };
-
-                    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-                    // 마커가 표시될 위치입니다
-                    var markerPosition = new kakao.maps.LatLng(lat, lng);
-
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                      position: markerPosition,
-                    });
-
-                    // 마커가 지도 위에 표시되도록 설정합니다
-                    marker.setMap(map);
-
-                    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-                    // marker.setMap(null);
-                  </script> -->
-                  <!-- <img src="./item-details_files/image1.jpg" id="current" alt="#"> -->
-                  <!-- kakao map end -->
                 </main>
               </div>
             </div>
