@@ -119,6 +119,7 @@ const routes = [
       {
         path: 'qnadetail',
         name: 'QNADetailView',
+        beforeEnter: onlyAuthUser,
         component: QNADetailView,
       },
       {
