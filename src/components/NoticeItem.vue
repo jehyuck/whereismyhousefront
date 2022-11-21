@@ -45,13 +45,13 @@ export default {
     ...mapState(userStore, ['isLogin', 'userInfo']),
     ...mapGetters(['checkUserInfo']),
   },
-  created() {
-    console.log(this.isLogin);
-    if (!this.isLogin) {
-      this.$router.push({ name: 'home' });
-    }
-    // console.log(this.userInfo);
-  },
+  // created() {
+  //   console.log(this.isLogin);
+  //   if (!this.isLogin) {
+  //     this.$router.push({ name: 'home' });
+  //   }
+  //   // console.log(this.userInfo);
+  // },
   methods: {
     ...mapActions(userStore, ['userLogout']),
     deleteNotice() {

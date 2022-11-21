@@ -1,6 +1,5 @@
 <template>
-<div>
-
+  <div>
     <div class="preloader" style="opacity: 0; display: none">
       <div class="preloader-inner">
         <div class="preloader-icon">
@@ -10,7 +9,6 @@
       </div>
     </div>
 
-    
     <div class="breadcrumbs">
       <div class="container">
         <div class="row align-items-center">
@@ -22,7 +20,7 @@
           <div class="col-lg-6 col-md-6 col-12">
             <ul class="breadcrumb-nav">
               <li>
-                <a href="${root}/index">Home</a>
+                <router-link to="/">Home</router-link>
               </li>
               <li>Close Account</li>
             </ul>
@@ -34,35 +32,32 @@
     <section class="dashboard section">
       <div class="container">
         <div class="row">
-
           <!-- 사이드바 -->
           <div class="col-lg-3 col-md-4 col-12">
             <div class="dashboard-sidebar">
               <div class="user-image">
                 <img src="@/assets/images/items-grid/author-1.jpg" alt="#" />
                 <h3>
-                  {{userInfo.name}}
-                  <span><a href="javascript:void(0)">@{{userInfo.id}}</a></span>
+                  {{ userInfo.name }}
+                  <span
+                    ><a href="javascript:void(0)">@{{ userInfo.id }}</a></span
+                  >
                 </h3>
               </div>
               <div class="dashboard-menu">
                 <ul>
                   <li>
-                    <router-link to="/mypage"
-                      ><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link
-                    >
+                    <router-link to="/mypage"><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link>
                   </li>
                   <li>
-                    <router-link to="/mypage/bookmark">
-                      <i class="lni lni-bookmark"></i>관심 지역 조회
-                    </router-link>
+                    <router-link to="/mypage/bookmark"> <i class="lni lni-bookmark"></i>관심 지역 조회 </router-link>
                   </li>
                   <li>
                     <router-link to="/mypage/withdrawal" class="active"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
                   </li>
                 </ul>
                 <div class="button">
-                  <a class="btn" href="${root}/user/logout">Logout</a>
+                  <a class="btn" @click="logoutHandler">Logout</a>
                 </div>
               </div>
             </div>
@@ -86,41 +81,45 @@
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
 <script>
 import http from '@/api/http';
 
-import { mapState, mapActions } from "vuex";
-const userStore = "userStore";
+import { mapState, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   computed: {
-    ...mapState(userStore, ["userInfo"])
+    ...mapState(userStore, ['userInfo']),
   },
   methods: {
-    ...mapActions(userStore, ["userLogout"]),
+    ...mapActions(userStore, ['userLogout']),
     moveHandler() {
       this.$router.push({
         name: 'home',
       });
     },
     withdrawalHandler() {
-        http.delete(`user/remove/${this.userInfo.id}`).then(({ data }) => {
+      http.delete(`user/remove/${this.userInfo.id}`).then(({ data }) => {
         if (data == 'success') {
-            this.userLogout(this.userInfo.id);
-            sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
-            sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
-            alert('회원탈퇴 완료');
-            this.$router.push({name: 'home',});
+          this.userLogout(this.userInfo.id);
+          sessionStorage.removeItem('access-token'); //저장된 토큰 없애기
+          sessionStorage.removeItem('refresh-token'); //저장된 토큰 없애기
+          alert('회원탈퇴 완료');
+          this.$router.push({ name: 'home' });
+        } else {
+          alert('다시 시도해주세요');
         }
-        else{
-          alert('다시 시도해주세요')
-        }
-        })
-    }
+      });
+    },
+    async logoutHandler() {
+      sessionStorage.removeItem('access-token'); //저장된 토큰 없애기
+      sessionStorage.removeItem('refresh-token'); //저장된 토큰 없애기
+      await this.userLogout(this.userInfo.id);
+      if (this.$route.path != '/') this.$router.push({ name: 'home' });
+    },
   },
 };
 </script>

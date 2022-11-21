@@ -70,19 +70,8 @@
               </form>
               <p class="outer-link">
                 이미 계정이 있으신가요?
-                <!-- <a href="${root}/user/login">로그인</a> -->
                 <router-link :to="{ name: 'login' }">로그인</router-link>
               </p>
-              <!-- 
-              <form action="${root}/user/regist" method="post" id="hiddenForm">
-                <fieldset>
-                  <input type="hidden" name="id" />
-                  <input type="hidden" name="pass" />
-                  <input type="hidden" name="name" />
-                  <input type="hidden" name="address" />
-                  <input type="hidden" name="phone" />
-                </fieldset>
-              </form> -->
             </div>
           </div>
         </div>

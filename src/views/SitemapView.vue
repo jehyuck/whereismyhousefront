@@ -11,7 +11,7 @@
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <ul class="breadcrumb-nav">
-              <li><a href="${root}/index">Home</a></li>
+              <li><router-link to="/">Home</router-link></li>
               <li>SITEMAP</li>
             </ul>
           </div>
@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-12">
             <div class="list-group">
-              <h3><a href="${root}/index">HOME</a></h3>
+              <h3><router-link to="/">Home</router-link></h3>
             </div>
           </div>
 

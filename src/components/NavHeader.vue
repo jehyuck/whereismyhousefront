@@ -49,15 +49,15 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a
+                  <router-link
                     class="dd-menu collapsed"
-                    to="javascript:void(0)"
+                    to="/aptsearch"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-4"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
-                    >Pages</a
+                    >Pages</router-link
                   >
                   <ul class="sub-menu collapse zz" id="submenu-1-4">
                     <ul class="zz">
@@ -70,15 +70,15 @@
                 </li>
                 <!-- <c:if test="${not empty userInfo}"> -->
                 <li class="nav-item">
-                  <a
+                  <router-link
                     class="dd-menu collapsed"
-                    to="javascript:void(0)"
+                    to="/mypage"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-5"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
-                    >My Page</a
+                    >My Page</router-link
                   >
                   <ul class="sub-menu collapse" id="submenu-1-5">
                     <li class="nav-item"><router-link to="mypage/bookmark">나의 관심 지역</router-link></li>

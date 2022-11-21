@@ -115,10 +115,10 @@ export default {
       this.dong = '';
     },
     getAptDatas() {
-      if (!this.isLogin) {
-        alert('로그인 해주세요');
-        this.$router.push({ name: 'login' });
-      }
+      // if (!this.isLogin) {
+      //   alert('로그인 해주세요');
+      //   this.$router.push({ name: 'login' });
+      // }
       this.getAptData({ sido: this.sido, gugun: this.gugun, dong: this.dong, pgno: this.pgno, word: this.word });
       if (this.$route.fullPath == '/') this.$router.push({ name: 'aptSearch' });
     },

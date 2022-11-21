@@ -10,7 +10,7 @@
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <ul class="breadcrumb-nav">
-              <li><a href="${root}/index">Home</a></li>
+              <li><router-link to="/">Home</router-link></li>
               <li>공지사항</li>
             </ul>
           </div>
@@ -173,11 +173,11 @@ export default {
     noticeItem,
   },
   created() {
-    console.log(this.isLogin);
-    if (!this.isLogin) {
-      alert('로그인을 해주세요!');
-      this.$router.push({ name: 'login' });
-    }
+    // console.log(this.isLogin);
+    // if (!this.isLogin) {
+    //   alert('로그인을 해주세요!');
+    //   this.$router.push({ name: 'login' });
+    // }
     http.get('/notice').then(({ data }) => {
       this.notices = data;
       console.log(data);

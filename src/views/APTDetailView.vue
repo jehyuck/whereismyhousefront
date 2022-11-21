@@ -11,7 +11,7 @@
           <div class="col-lg-6 col-md-6 col-12">
             <ul class="breadcrumb-nav">
               <li>
-                <a href="${root}/index">Home</a>
+                <router-link to="/">Home</router-link>
               </li>
               <li>Apt Details</li>
             </ul>
@@ -122,28 +122,26 @@ export default {
   created() {
     this.houseInfo = this.$route.query;
     // console.log(this.houseInfo);
-      http.get('house/apt', { params: this.houseInfo }).then(({ data }) => {
-        console.log(data.aptList);
-        // this.houseInfo = data.houseInfo
-        this.aptList = data.aptList;
-      })
-
+    http.get('house/apt', { params: this.houseInfo }).then(({ data }) => {
+      console.log(data.aptList);
+      // this.houseInfo = data.houseInfo
+      this.aptList = data.aptList;
+    });
   },
   mounted() {
-    
-      const script = document.createElement('script');
-      /* global kakao */
-      script.onload = () => {
-        kakao.maps.load(this.initMap);
-      }
-      script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b70f48995231071c0cead1213a57bb03';
-      document.head.appendChild(script);
+    const script = document.createElement('script');
+    /* global kakao */
+    script.onload = () => {
+      kakao.maps.load(this.initMap);
+    };
+    script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b70f48995231071c0cead1213a57bb03';
+    document.head.appendChild(script);
   },
   methods: {
     initMap() {
       var lat = `${this.houseInfo.lat}`,
-      lng = `${this.houseInfo.lng}`;
-      
+        lng = `${this.houseInfo.lng}`;
+
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
           center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
@@ -171,9 +169,7 @@ export default {
         this.markers.forEach((marker) => marker.setMap(null));
       }
 
-      const positions = markerPositions.map(
-        (position) => new kakao.maps.LatLng(...position)
-      );
+      const positions = markerPositions.map((position) => new kakao.maps.LatLng(...position));
 
       if (positions.length > 0) {
         this.markers = positions.map(
@@ -184,14 +180,11 @@ export default {
             })
         );
 
-        const bounds = positions.reduce(
-          (bounds, latlng) => bounds.extend(latlng),
-          new kakao.maps.LatLngBounds()
-        );
+        const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
 
         this.map.setBounds(bounds);
       }
     },
-  }
+  },
 };
 </script>

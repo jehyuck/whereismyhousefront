@@ -20,7 +20,7 @@
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <ul class="breadcrumb-nav">
-              <li><a href="${root}/index">Home</a></li>
+              <li><router-link to="/">Home</router-link></li>
               <li>Login</li>
             </ul>
           </div>
@@ -86,14 +86,6 @@
                 </p>
                 <!-- <alert show variant="danger" v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</alert> -->
               </form>
-
-              <!-- 실제 서버로 전송되는 form -->
-              <!-- <form action="${root}/user/login" method="post" id="hiddenForm">
-                <fieldset>
-                  <input type="hidden" name="id" />
-                  <input type="hidden" name="password" />
-                </fieldset>
-              </form> -->
             </div>
           </div>
         </div>
