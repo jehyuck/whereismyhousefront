@@ -25,7 +25,7 @@
             <div class="mb-3" style="">
               <div class="m-auto">제목</div>
               <textarea rows="2" cols="130" v-model="notice.title"></textarea>
-              <div class="mt-3 mb-1 border-bottom">작성자: {{ notice.author }} | 작성일: {{ notice.createdTime }}</div>
+              <div class="mt-3 mb-1 border-bottom">작성자: {{ notice.author }}</div>
             </div>
             <div class="col-lg-12 col-md-12 col-12">
               <div class="m-auto">내용</div>
@@ -36,7 +36,7 @@
 
         <div class="mt-3">
           <span class="button">
-            <a class="btn m-2" @click="updateNotice">수정</a>
+            <a class="btn m-2" @click="insertNotice">등록</a>
           </span>
 
           <span class="button">
@@ -49,7 +49,9 @@
 </template>
 
 <script>
-// import http from '@/api/http';
+import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   data() {
@@ -60,9 +62,32 @@ export default {
         title: '',
         author: '',
         content: '',
-        createdTime: '',
       },
     };
+  },
+  mounted() {
+    this.notice.author = this.userInfo.id;
+    console.log(this.userInfo);
+    console.log(this.isLogin);
+  },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
+  methods: {
+    ...mapActions(userStore, ['userLogout']),
+    insertNotice() {
+      console.log('공지사항 등록 updateNotice......................');
+      console.log(this.notice);
+      http
+        .post('/notice', this.notice)
+        .then(() => {
+          this.$router.push({ name: 'noticeList' });
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+    },
   },
 };
 </script>

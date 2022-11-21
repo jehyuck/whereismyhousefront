@@ -81,7 +81,7 @@
 
                           <div class="col-lg-1 col-md-1 col-12 align-middle">
                             <div class="action-btn">
-                              <router-link :to="{ name: 'noticeInsert' }"><i class="lni lni-plus"></i></router-link>
+                              <router-link v-if="this.isLogin && ['admin', 'ssafy'].includes(this.userInfo.id)" :to="{ name: 'noticeInsert' }"><i class="lni lni-plus"></i></router-link>
                             </div>
                             <!-- <c:if test="${not empty userInfo and userInfo.id eq 'admin'}">
                             </c:if> -->
@@ -148,7 +148,10 @@
 
 <script>
 import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import noticeItem from '@/components/NoticeItem.vue';
+const userStore = 'userStore';
+
 export default {
   data() {
     return {
@@ -162,15 +165,26 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
   components: {
     noticeItem,
   },
   created() {
-    http.get('notice').then(({ data }) => {
+    console.log(this.isLogin);
+    if (!this.isLogin) {
+      alert('로그인을 해주세요!');
+      this.$router.push({ name: 'login' });
+    }
+    http.get('/notice').then(({ data }) => {
       this.notices = data;
       console.log(data);
     });
   },
-  methods: {},
+  methods: {
+    ...mapActions(userStore, ['userLogout']),
+  },
 };
 </script>

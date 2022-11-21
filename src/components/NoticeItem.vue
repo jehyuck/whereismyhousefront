@@ -19,10 +19,10 @@
           <li>
             <router-link :to="{ name: 'noticeDetail', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-eye"></i></router-link>
           </li>
-          <li>
+          <li v-if="['admin', 'ssafy'].includes(this.userInfo.id)">
             <router-link :to="{ name: 'noticeModify', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-pencil"></i></router-link>
           </li>
-          <li>
+          <li v-if="['admin', 'ssafy'].includes(this.userInfo.id)">
             <a @click="deleteNotice"><i class="lni lni-trash"></i></a>
           </li>
         </ul>
@@ -33,14 +33,32 @@
 
 <script>
 import http from '@/api/http';
+import { mapState, mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
+
 export default {
   name: 'noticeItem',
   props: {
     notice: {},
   },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
+  created() {
+    console.log(this.isLogin);
+    if (!this.isLogin) {
+      this.$router.push({ name: 'home' });
+    }
+    // console.log(this.userInfo);
+  },
   methods: {
+    ...mapActions(userStore, ['userLogout']),
     deleteNotice() {
-      http.delete(`notice/${this.notice.noticeNo}`);
+      http.delete(`notice/${this.notice.noticeNo}`).then(() => {
+        // this.$router.push({ name: 'noticeList' });
+        this.$router.push();
+      });
     },
   },
 };

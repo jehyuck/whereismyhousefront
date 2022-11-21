@@ -52,7 +52,8 @@
 <script>
 import axios from 'axios';
 // import http from '@/api/http';
-import { mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
 
 export default {
   name: 'searchBox',
@@ -69,12 +70,17 @@ export default {
       pgno: '',
     };
   },
+  computed: {
+    ...mapState(userStore, ['isLogin', 'userInfo']),
+    ...mapGetters(['checkUserInfo']),
+  },
   created() {
     // console.log(this.$route)
     this.sendRequest('sido', '*00000000');
   },
   methods: {
     ...mapActions(['getAptData']),
+    ...mapActions(userStore, ['userLogout']),
     setSido(dataa, sido) {
       dataa.regcodes.forEach(function (regcode) {
         sido.push({ name: regcode.name, value: regcode.code });
@@ -109,8 +115,12 @@ export default {
       this.dong = '';
     },
     getAptDatas() {
+      if (!this.isLogin) {
+        alert('로그인 해주세요');
+        this.$router.push({ name: 'login' });
+      }
       this.getAptData({ sido: this.sido, gugun: this.gugun, dong: this.dong, pgno: this.pgno, word: this.word });
-      if (this.$route.fullPath == "/") this.$router.push({name:"aptSearch"})
+      if (this.$route.fullPath == '/') this.$router.push({ name: 'aptSearch' });
     },
     sendRequest(selid, regcode) {
       const url = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes';
