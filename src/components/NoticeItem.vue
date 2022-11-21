@@ -14,19 +14,17 @@
         <p>{{ notice.createdTime }}</p>
       </div>
 
-      <div class="col-lg-2 col-md-2 col-12 align-left">
+      <div class="row col-lg-3 col-md-3 col-12 align-items-rihgt">
         <ul class="action-btn">
           <li>
             <router-link :to="{ name: 'noticeDetail', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-eye"></i></router-link>
           </li>
-          <div v-if="true">
-            <li>
-              <router-link :to="{ name: 'noticeModify', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-pencil"></i></router-link>
-            </li>
-            <li>
-              <a @click="deleteNotice"><i class="lni lni-trash"></i></a>
-            </li>
-          </div>
+          <li>
+            <router-link :to="{ name: 'noticeModify', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-pencil"></i></router-link>
+          </li>
+          <li>
+            <a @click="deleteNotice"><i class="lni lni-trash"></i></a>
+          </li>
         </ul>
       </div>
     </div>

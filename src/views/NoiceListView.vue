@@ -78,15 +78,12 @@
                           <div class="col-lg-11 col-md-11 col-12">
                             <h3>공지사항 목록</h3>
                           </div>
-                          <!-- <div v-if="notices.length > 0">
-                            <b-table hover striped :items="notices" :fields="fields" @row-clicked="goDetail"> </b-table>
-                          </div> -->
-                          <!-- <div v-else>등록된 책 목록이 없습니다.</div> -->
+
                           <div class="col-lg-1 col-md-1 col-12 align-middle">
+                            <div class="action-btn">
+                              <router-link :to="{ name: 'noticeInsert' }"><i class="lni lni-plus"></i></router-link>
+                            </div>
                             <!-- <c:if test="${not empty userInfo and userInfo.id eq 'admin'}">
-                              <div class="action-btn">
-                                <a href="${root}/notice/insert"><i class="lni lni-plus"></i></a>
-                              </div>
                             </c:if> -->
                           </div>
                         </div>
@@ -174,8 +171,6 @@ export default {
       console.log(data);
     });
   },
-  methods: {
-    goDetail() {},
-  },
+  methods: {},
 };
 </script>

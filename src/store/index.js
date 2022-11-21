@@ -26,7 +26,6 @@ export default new Vuex.Store({
       let searchData = payload.data;
       let search = payload.search;
       
-      // console.log(search);
       state.apts = searchData.houseList;
       state.sidocode = searchData.sidoCode;
       state.guguncode = searchData.gugunCode;
@@ -46,11 +45,11 @@ export default new Vuex.Store({
       state.pageList = [];
 
       var length = state.end - state.start + 1;
+      length = length % 10 == 1 ? length - 1 : length;
       console.log(length, state.end, state.start);
       for (var i = 0, start = state.start; i < length; i++) {
         state.pageList[i] = start;
         start++;
-        // console.log(i)
       }
       console.log(state.pageList, state.pgSize);
     },
@@ -60,7 +59,6 @@ export default new Vuex.Store({
       http
         .get(`/house?sido=${search.sido}&gugun=${search.gugun}&dong=${search.dong}&pgno=${search.searchPgno}&aptname=${search.word}`)
         .then(({ data }) => {
-          // console.log(data);
           commit("SET_APT_LIST", { data: data, search: search });
           commit('SET_PAGE_NUM', { start: 1, page:1 });
         })
@@ -69,15 +67,12 @@ export default new Vuex.Store({
         });
     },
     setStartEnd({ commit, }, page) {
-      var start = Math.floor(page / 10) * 10 +1;
+      var start = Math.floor((page - 1) / 10) * 10 + 1;
       // let arg = { sido: this.state.sidocode, gugun: this.guguncode, dong: this.dongcode, pgno: this.searchPgno, word: this.word };
-      // console.log(page, totalListSize, start)
       commit('SET_PAGE_NUM', { page: page, start: start});
-      // console.log("state....",this.state);
       http
           .get(`house?sido=${this.state.sidocode}&gugun=${this.state.guguncode}&dong=${this.state.dongcode}&pgNo=${this.state.searchPgno}&aptname=${this.state.aptname}`)
           .then(({ data }) => {
-            // console.log(data.houseList);
             commit("SET_ONLY_APT_LIST", data.houseList);
           })
           .catch((res) => {

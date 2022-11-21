@@ -124,19 +124,14 @@
                         </div>
                         <div class="row">
                           <div class="col-12">
-                            <div class="pagination left">
+                            <div class="pagination center">
                               <ul class="pagination-list">
-                                <!-- <c:set var="curPgNo" value="${pgNo}"></c:set>
-                                <c:forEach var="pgIdx" begin="1" end="${pgSize + 1}" step="1">
-                                  <c:choose>
-                                    <c:when test="${curPgNo eq pgIdx}">
-                                      <li class="active"><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                      <li><a href="${root}/house/search/?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                    </c:otherwise>
-                                  </c:choose>
-                                </c:forEach> -->
+                                <li class="btn btn-primary" @click="prePage">이전</li>
+
+                                <li class="btn btn-primary" v-for="item in pageList" :key="item" @click="setPage($event)">
+                                  {{ item }}
+                                </li>
+                                <li class="btn btn-primary" @click="nextPage">다음</li>
                               </ul>
                             </div>
                           </div>
@@ -209,7 +204,6 @@
                             </div>
                           </div>
                         </div>
-                        <!-- <input type="text" readonly v-model="searchPgno"> -->
                         <div class="row">
                           <div class="col-12">
                             <div class="pagination center">
@@ -218,14 +212,6 @@
 
                                 <li class="btn btn-primary" v-for="item in pageList" :key="item" @click="setPage($event)">
                                   {{ item }}
-                                  <!-- <c:choose>
-                                    <c:when test="${pgNo eq pgIdx}">
-                                      <li class="active"><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">{{}}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                      <li><a href="${root}/house/search?sido=${sidoCode}&gugun=${gugunCode}&dong=${dongCode}&aptName=${aptName}&pgNo=${pgIdx}">${pgIdx}</a></li>
-                                    </c:otherwise>
-                                  </c:choose> -->
                                 </li>
                                 <li class="btn btn-primary" @click="nextPage">다음</li>
                               </ul>
@@ -253,24 +239,19 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
-    ...mapState(['apts', 'totalListSize', 'pgSize', 'searchPgno', 'start', 'end', "pageList", "searchPgno"]),
+    ...mapState(['apts', 'totalListSize', 'pgSize', 'searchPgno', 'start', 'end', 'pageList', 'searchPgno']),
   },
   components: {
     SearchBox,
   },
-  created() {
-    // console.log(this.pageList);
-  },
+  created() {},
   methods: {
-    ...mapActions(['setStartEnd', "moveStartEnd"]),
-    
+    ...mapActions(['setStartEnd', 'moveStartEnd']),
+
     setPage(event) {
-      // console.log(this.pageList);
-      // console.log(event.currentTarget.innerText)
       this.setStartEnd(event.currentTarget.innerText);
     },
     prePage() {
@@ -282,7 +263,7 @@ export default {
       if (this.start + 10 < this.pgSize) {
         this.moveStartEnd(10);
       }
-    }
+    },
   },
 };
 </script>

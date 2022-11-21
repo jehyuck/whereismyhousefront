@@ -97,6 +97,7 @@ export default {
       } else {
         //수정하기
         http.put('/qna', this.qna).then(({ data }) => {
+          console.log(data);
           if (data == 'success') {
             alert('수정성공');
             this.moveHandler();
