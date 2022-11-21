@@ -23,11 +23,12 @@
         <div class="top-area">
           <div class="row">
             <div class="mb-3" style="">
-              <h3>{{ notice.title }}</h3>
+              <div class="m-auto">제목</div>
+              <textarea rows="2" cols="130" v-model="notice.title"></textarea>
               <div class="mt-3 mb-1 border-bottom">작성자: {{ notice.author }} | 작성일: {{ notice.createdTime }}</div>
             </div>
             <div class="col-lg-12 col-md-12 col-12">
-              <textarea v-model="notice.content"></textarea>
+              <textarea rows="15" cols="150" v-model="notice.content"></textarea>
             </div>
           </div>
         </div>
@@ -53,23 +54,30 @@ export default {
   data() {
     return {
       noticeNo: String,
-      notice: {},
+      notice: {
+        noticeNo: '',
+        title: '',
+        author: '',
+        content: '',
+        createdTime: '',
+      },
     };
   },
   created() {
     this.noticeNo = this.$route.query.noticeNo;
     http.get(`notice/${this.noticeNo}`).then(({ data }) => {
       this.notice = data;
-      console.log(this.notice);
+      console.log('공지사항 수정 create.........', this.notice);
     });
   },
   methods: {
     updateNotice() {
+      console.log('공지사항 수정 updateNotice......................');
       console.log(this.notice);
       http
         .put('/notice', this.notice)
-        .then(({ data }) => {
-          alert(data);
+        .then(() => {
+          this.$router.push({ name: 'noticeList' });
         })
         .catch((res) => {
           console.log(res);
