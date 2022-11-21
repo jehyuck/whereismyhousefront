@@ -17,7 +17,7 @@
     <div>
       <b-table hover striped :items="qnas" :fields="fields" @row-clicked="goDetail"> </b-table>
     </div>
-    <b-button v-if="this.userInfo.id && !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary" @click="registQNA">질문 등록 </b-button>
+    <b-button v-if="this.isLogin && this.userInfo.id && !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary" @click="registQNA">질문 등록 </b-button>
     <!-- <div v-else>등록된 책 목록이 없습니다.</div> -->
   </div>
 </template>
