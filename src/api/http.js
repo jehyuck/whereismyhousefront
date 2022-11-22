@@ -5,6 +5,5 @@ export default axios.create({
   headers: {
     'Content-Type': 'application/json',
     Authorization: sessionStorage.getItem('access-token'),
-    // 'Access-Control-Allow-Origin': '*',
   },
 });

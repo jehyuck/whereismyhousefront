@@ -87,7 +87,7 @@
                         </div>
                       </div>
                     </div>
-                    <div v-for="(bookmark, index) in bookmarks" :key="index">
+                    <div @add="getBookmarks" v-for="(bookmark, index) in bookmarks" :key="index">
                       <div class="single-item-list">
                         <div class="row align-items-center">
                           <div class="col-lg-3 col-md-3 col-12">
@@ -149,11 +149,11 @@ export default {
   computed: {
     ...mapState(userStore, ['userInfo']),
   },
-  mounted() {
+  created() {
     this.getBookmarks();
   },
   updated() {
-    this.getBookmarks();
+    // this.getBookmarks();
   },
   methods: {
     ...mapActions(userStore, ['userLogout']),
