@@ -62,7 +62,7 @@
 
           <div class="col-lg-9 col-md-8 col-12">
             <!-- Start Search Form -->
-            <add-box></add-box>
+            <add-box @add="getBookmarks"></add-box>
             <!-- End Search Form -->
 
             <!-- Start bookmark -->
@@ -144,6 +144,7 @@ export default {
   data() {
     return {
       bookmarks: [],
+      sz: 0,
     };
   },
   computed: {
@@ -166,6 +167,7 @@ export default {
       http.get(`bookmark?id=${this.userInfo.id}`).then(({ data }) => {
         if (data.message == 'success') {
           this.bookmarks = data.bookmarks;
+          this.sz = this.bookmarks.length;
         }
       });
     },
@@ -176,15 +178,16 @@ export default {
         params: { id: id },
       });
     },
-    removeHandler(id) {
+    async removeHandler(id) {
       //id는 bookmark의 id
       console.log(this.bookmarks);
-      http.delete(`bookmark?id=${id}`).then(({ data }) => {
+      await http.delete(`bookmark?id=${id}`).then(({ data }) => {
         if (data.message == 'success') {
           this.getBookmarks();
+          console.log(this.bookmarks);
         }
       });
-      this.getBookmarks();
+      await this.getBookmarks();
       console.log(this.bookmarks);
     },
     async logoutHandler() {

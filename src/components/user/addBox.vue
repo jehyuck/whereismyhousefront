@@ -131,7 +131,7 @@ export default {
       console.log({ dong: this.dong, userid: this.userInfo.id });
       http.post(`bookmark`, { dong: this.dong, userid: this.userInfo.id }).then(({ data }) => {
         if (data == 'success') {
-          this.$emit('add', true);
+          this.$emit('add');
           alert('북마크 추가 완료');
         }
       });
