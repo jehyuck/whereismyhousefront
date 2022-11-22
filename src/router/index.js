@@ -164,6 +164,7 @@ const routes = [
   {
     path: '/noticedetail',
     name: 'noticeDetail',
+    beforeEnter: onlyAuthUser,
     component: NoticeDetailView,
   },
   {

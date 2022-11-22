@@ -79,19 +79,20 @@ const userStore = {
       );
     },
     async tokenRegeneration({ commit, state }) {
-      // console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
+      console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
       await tokenRegeneration(
         JSON.stringify(state.userInfo),
         ({ data }) => {
           if (data.message === 'success') {
             let accessToken = data['access-token'];
-            // console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
+            console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
             sessionStorage.setItem('access-token', accessToken);
             commit('SET_IS_VALID_TOKEN', true);
           }
         },
         async (error) => {
           // HttpStatus.UNAUTHORIZE(401) : RefreshToken 기간 만료 >> 다시 로그인!!!!
+          console.log("만료!!!!!!!!!!!!!!!!",error);
           if (error.response.status === 401) {
             console.log('갱신 실패');
             // 다시 로그인 전 DB에 저장된 RefreshToken 제거.
