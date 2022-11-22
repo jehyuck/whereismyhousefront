@@ -19,10 +19,10 @@
           <li>
             <router-link :to="{ name: 'noticeDetail', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-eye"></i></router-link>
           </li>
-          <li v-if="['admin', 'ssafy'].includes(this.userInfo.id)">
+          <li v-if="isLogin && ['admin', 'ssafy'].includes(this.userInfo.id)">
             <router-link :to="{ name: 'noticeModify', query: { noticeNo: notice.noticeNo } }"><i class="lni lni-pencil"></i></router-link>
           </li>
-          <li v-if="['admin', 'ssafy'].includes(this.userInfo.id)">
+          <li v-if="isLogin && ['admin', 'ssafy'].includes(this.userInfo.id)">
             <a @click="deleteNotice"><i class="lni lni-trash"></i></a>
           </li>
         </ul>
