@@ -1,5 +1,22 @@
 <template>
   <div>
+    <div class="breadcrumbs my-2">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 col-12">
+            <div class="breadcrumbs-content">
+              <h1 class="page-title">QNA List</h1>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <ul class="breadcrumb-nav">
+              <li><router-link to="/">Home</router-link></li>
+              <li>QNA List</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-2"></div>
       <div class="col-2">
@@ -13,10 +30,12 @@
       </div>
       <div class="col-2"></div>
     </div>
-    <div>
-      <b-table hover striped :items="qnas" :fields="fields" @row-clicked="goDetail"> </b-table>
+    <div class="container">
+      <div class="border border-gray rounded mt-3">
+        <b-table hover striped :items="qnas" :fields="fields" @row-clicked="goDetail"> </b-table>
+      </div>
+      <b-button class="mt-2" v-if="this.isLogin && this.userInfo.id && !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary" @click="registQNA">질문 등록 </b-button>
     </div>
-    <b-button v-if="this.isLogin && this.userInfo.id && !['admin', 'ssafy'].includes(this.userInfo.id)" variant="primary" @click="registQNA">질문 등록 </b-button>
   </div>
 </template>
 
