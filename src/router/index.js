@@ -75,7 +75,7 @@ const routes = [
     path: '/front/mypage',
     name: 'mypage',
     beforeEnter: onlyAuthUser,
-    redirect: '/front/mypage/front/usermodify',
+    redirect: '/front/mypage/usermodify',
     component: MyPageView,
     children: [
       {
@@ -109,7 +109,7 @@ const routes = [
     path: '/front/qna',
     name: 'qna',
     component: QNAView,
-    redirect: 'front/qna/front/qnalist',
+    redirect: 'front/qna/qnalist',
     children: [
       {
         path: 'qnalist',
