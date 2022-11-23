@@ -93,6 +93,7 @@ export default {
     console.log('view.html..................qnaNo]', this.qnaNo);
     http.get(`qna/${this.qnaNo}`).then(({ data }) => {
       this.qna = data;
+      console.log(sessionStorage.getItem('access-token'));
     });
   },
   methods: {

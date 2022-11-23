@@ -1,9 +1,23 @@
 import axios from 'axios';
 
-export default axios.create({
+const http = axios.create({
   baseURL: 'http://localhost/',
   headers: {
     'Content-Type': 'application/json',
     Authorization: sessionStorage.getItem('access-token'),
   },
 });
+
+http.interceptors.request.use(
+  function (config) {
+    // 요청을 보내기 전 수행할 작업
+    config.headers.Authorization = sessionStorage.getItem('access-token');
+    return config;
+  },
+  function (error) {
+    // 오류 요청 가공
+    return Promise.reject(error);
+  }
+);
+
+export default http;

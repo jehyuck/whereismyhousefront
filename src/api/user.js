@@ -13,6 +13,7 @@ async function findById(id, success, fail) {
 }
 
 async function tokenRegeneration(user, success, fail) {
+  console.log('토큰 리제너레이션');
   console.log(user);
   api.defaults.headers['refresh-token'] = sessionStorage.getItem('refresh-token'); //axios header에 refresh-token 셋팅
   await api.post(`/user/refresh`, user).then(success).catch(fail);
