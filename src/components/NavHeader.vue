@@ -1,27 +1,3 @@
-<!-- <template>
-  <nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about">About</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/book">도서 관리</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/login">로그인</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/qna">qna</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</template> -->
-
 <template>
   <div class="container">
     <div class="row align-items-center">
@@ -51,7 +27,7 @@
                 <li class="nav-item">
                   <router-link
                     class="dd-menu collapsed"
-                    to="/aptsearch"
+                    :to="{ name: 'aptSearch' }"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-4"
                     aria-controls="navbarSupportedContent"
@@ -61,10 +37,10 @@
                   >
                   <ul class="sub-menu collapse zz" id="submenu-1-4">
                     <ul class="zz">
-                      <li class="nav-item zz"><router-link to="/aptsearch">검색</router-link></li>
-                      <li class="nav-item zz"><router-link to="/about">홈페이지 소개</router-link></li>
-                      <li class="nav-item zz"><router-link to="/noticelist">공지사항</router-link></li>
-                      <li class="nav-item zz"><router-link to="/sitemap">사이트맵</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'aptSearch' }">검색</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'about' }">홈페이지 소개</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'noticeList' }">공지사항</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'sitemap' }">사이트맵</router-link></li>
                     </ul>
                   </ul>
                 </li>
@@ -72,7 +48,7 @@
                 <li class="nav-item">
                   <router-link
                     class="dd-menu collapsed"
-                    to="/mypage"
+                    :to="{ name: 'mypage' }"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-5"
                     aria-controls="navbarSupportedContent"
@@ -85,7 +61,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <router-link class="nav-link" to="/qna">qna</router-link>
+                  <router-link class="nav-link" :to="{ name: 'qna' }">qna</router-link>
                 </li>
                 <!-- </c:if> -->
               </ul>
@@ -95,16 +71,16 @@
               <ul>
                 <div v-if="!userInfo">
                   <li>
-                    <router-link to="/login"><i class="lni lni-enter"></i> 로그인</router-link>
+                    <router-link :to="{ name: 'login' }"><i class="lni lni-enter"></i> 로그인</router-link>
                   </li>
                   <li>
-                    <router-link to="/regist"><i class="lni lni-user"></i> 회원가입</router-link>
+                    <router-link :to="{ name: 'regist' }"><i class="lni lni-user"></i> 회원가입</router-link>
                   </li>
                 </div>
                 <div v-else>
                   <div v-if="userInfo.id == 'admin'">
                     <li>
-                      <router-link to="/noticelist"><i class="lni lni-user"></i> 공지사항 관리</router-link>
+                      <router-link :to="{ name: 'noticeList' }"><i class="lni lni-user"></i> 공지사항 관리</router-link>
                     </li>
                     <li>
                       <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->
@@ -113,7 +89,7 @@
                   </div>
                   <div v-else>
                     <li>
-                      <router-link to="/mypage"><i class="lni lni-user"></i> 회원정보</router-link>
+                      <router-link :to="{ name: 'mypage' }"><i class="lni lni-user"></i> 회원정보</router-link>
                     </li>
                     <li>
                       <!-- <router-link to="/user/logout"><i class="lni lni-user"></i> 로그아웃</router-link> -->

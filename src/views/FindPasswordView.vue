@@ -53,12 +53,12 @@
                 <div class="row align-items-center">
                   <div class="col-lg-6 col-md-6 col-12">
                     <p class="outer-link">
-                      <router-link to="/login">로그인</router-link>
+                      <router-link :to="{ name: 'login' }">로그인</router-link>
                     </p>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <p class="outer-link">
-                      <router-link to="/regist">회원가입</router-link>
+                      <router-link :to="{ name: 'regist' }">회원가입</router-link>
                     </p>
                   </div>
                 </div>

@@ -47,13 +47,13 @@
               <div class="dashboard-menu">
                 <ul>
                   <li>
-                    <router-link to="/mypage"><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link>
+                    <router-link :to="{ name: 'mypage' }"><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link>
                   </li>
                   <li>
-                    <router-link to="/mypage/bookmark"> <i class="lni lni-bookmark"></i>관심 지역 조회 </router-link>
+                    <router-link :to="{ name: 'Bookmark' }"> <i class="lni lni-bookmark"></i>관심 지역 조회 </router-link>
                   </li>
                   <li>
-                    <router-link to="/mypage/withdrawal" class="active"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
+                    <router-link :to="{ name: 'withdrawal' }" class="active"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
                   </li>
                 </ul>
                 <div class="button">
@@ -72,7 +72,7 @@
                 <h4>이 작업은 되돌릴 수 없습니다. 정말 회원탈퇴 하시겠습니까?</h4>
                 <div class="button">
                   <button class="btn" @click="withdrawalHandler" type="submit">탈퇴</button>
-                  <router-link to="/mypage" class="btn btn-alt">취소</router-link>
+                  <router-link :to="{ name: 'mypage' }" class="btn btn-alt">취소</router-link>
                 </div>
               </div>
             </div>

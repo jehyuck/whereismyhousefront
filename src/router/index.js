@@ -57,25 +57,25 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/login',
+    path: '/front/login',
     name: 'login',
     component: LoginView,
   },
   {
-    path: '/regist',
+    path: '/front/regist',
     name: 'regist',
     component: RegistView,
   },
   {
-    path: '/findpassword',
+    path: '/front/findpassword',
     name: 'findPassword',
     component: FindPasswordView,
   },
   {
-    path: '/mypage',
+    path: '/front/mypage',
     name: 'mypage',
     beforeEnter: onlyAuthUser,
-    redirect: 'mypage/usermodify',
+    redirect: '/front/mypage/front/usermodify',
     component: MyPageView,
     children: [
       {
@@ -100,16 +100,16 @@ const routes = [
     ],
   },
   {
-    path: 'bookmarkdetail',
+    path: 'front/bookmarkdetail',
     name: 'bookmarkDetail',
     beforeEnter: onlyAuthUser,
     component: BookmarkDetailView,
   },
   {
-    path: '/qna',
+    path: '/front/qna',
     name: 'qna',
     component: QNAView,
-    redirect: 'qna/qnalist',
+    redirect: 'front/qna/front/qnalist',
     children: [
       {
         path: 'qnalist',
@@ -137,50 +137,50 @@ const routes = [
     ],
   },
   {
-    path: '/about',
+    path: '/front/about',
     name: 'about',
     component: AboutView,
   },
   {
-    path: '/sitemap',
+    path: '/front/sitemap',
     name: 'sitemap',
     component: SitemapView,
   },
   {
-    path: '/aptsearch',
+    path: '/front/aptsearch',
     name: 'aptSearch',
     component: APTSearchView,
   },
   {
-    path: '/aptdetail',
+    path: '/front/aptdetail',
     name: 'aptDetail',
     component: APTDetailView,
   },
   {
-    path: '/noticelist',
+    path: '/front/noticelist',
     name: 'noticeList',
     component: NoiceListView,
   },
   {
-    path: '/noticedetail',
+    path: '/front/noticedetail',
     name: 'noticeDetail',
     beforeEnter: onlyAuthUser,
     component: NoticeDetailView,
   },
   {
-    path: '/noticemodify',
+    path: '/front/noticemodify',
     name: 'noticeModify',
     beforeEnter: onlyAuthUser,
     component: NoticeModifyView,
   },
   {
-    path: '/noticeinsert',
+    path: '/front/noticeinsert',
     name: 'noticeInsert',
     beforeEnter: onlyAuthUser,
     component: NoticeInsertView,
   },
   {
-    path: '/error',
+    path: '/front/error',
     name: 'error',
     component: ErrorView,
   },

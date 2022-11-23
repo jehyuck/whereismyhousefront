@@ -60,7 +60,7 @@
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                      <router-link to="/findpassword" class="lost-pass">비밀번호 찾기</router-link>
+                      <router-link :to="{ name: 'findPassword' }" class="lost-pass">비밀번호 찾기</router-link>
                     </div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@
                 </div>
                 <p class="outer-link">
                   계정이 없으신가요?
-                  <router-link to="/regist">회원가입</router-link>
+                  <router-link :to="{ name: 'regist' }">회원가입</router-link>
                 </p>
                 <!-- <alert show variant="danger" v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</alert> -->
               </form>

@@ -48,13 +48,13 @@
               <div class="dashboard-menu">
                 <ul>
                   <li>
-                    <router-link class="active" to="/mypage"><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link>
+                    <router-link class="active" :to="{ name: 'mypage' }"><i class="lni lni-pencil-alt"></i>회원정보 조회/수정</router-link>
                   </li>
                   <li>
-                    <router-link to="/mypage/bookmark"> <i class="lni lni-bookmark"></i>관심 지역 조회 </router-link>
+                    <router-link :to="{ name: 'Bookmark' }"> <i class="lni lni-bookmark"></i>관심 지역 조회 </router-link>
                   </li>
                   <li>
-                    <router-link to="/mypage/withdrawal"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
+                    <router-link :to="{ name: 'withdrawal' }"><i class="lni lni-trash"></i>회원 탈퇴</router-link>
                   </li>
                 </ul>
                 <div class="button">
