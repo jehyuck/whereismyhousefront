@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'http://localhost/',
+  baseURL: 'http://54.180.12.116/',
   headers: {
     'Content-Type': 'application/json',
     Authorization: sessionStorage.getItem('access-token'),
