@@ -109,7 +109,7 @@
 
                       <div class="col-12">
                         <div class="form-group button mb-0">
-                          <button @click="updateHandler" type="submit" class="btn">수정</button>
+                          <button @click="updateHandler" class="btn">수정</button>
                         </div>
                       </div>
                     </div>
@@ -161,6 +161,7 @@ export default {
       http.put(`user/update`, this.user).then(({ data }) => {
         if (data == 'success') {
           alert('회원정보 수정 완료');
+          this.moveHandler();
         }
       });
       // .catch();

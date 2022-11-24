@@ -2,16 +2,18 @@
   <div id="app" class="jumbobox">
     <nav-header></nav-header>
     <router-view />
+    <footer-view></footer-view>
   </div>
 </template>
 
 <script>
 import NavHeader from '@/components/NavHeader.vue';
-
+import FooterView from './components/FooterView';
 export default {
   name: 'App',
   components: {
     NavHeader,
+    FooterView,
   },
 };
 </script>
