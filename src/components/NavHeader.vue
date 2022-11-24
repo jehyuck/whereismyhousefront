@@ -26,12 +26,13 @@
                 </li>
                 <li class="nav-item">
                   <router-link
+                    id="pages"
                     class="dd-menu collapsed"
-                    :to="{ name: 'aptSearch' }"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-4"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
+                    :to="{ name: 'aptSearch' }"
                     aria-label="Toggle navigation"
                     >Pages</router-link
                   >
@@ -47,8 +48,8 @@
                 <!-- <c:if test="${not empty userInfo}"> -->
                 <li class="nav-item">
                   <router-link
-                    class="dd-menu collapsed"
                     :to="{ name: 'mypage' }"
+                    class="dd-menu collapsed"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-5"
                     aria-controls="navbarSupportedContent"
@@ -56,6 +57,18 @@
                     aria-label="Toggle navigation"
                     >My Page
                   </router-link>
+                  <div
+                    id="mypage"
+                    class="dd-menu collapsed"
+                    :to="{ name: 'mypage' }"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#submenu-1-5"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    My Page
+                  </div>
                   <ul class="sub-menu collapse" id="submenu-1-5">
                     <li class="nav-item"><router-link :to="{ name: 'Bookmark' }">나의 관심 지역</router-link></li>
                   </ul>
@@ -121,6 +134,28 @@ export default {
     // ...mapGetters(['checkUserInfo']),
   },
   mounted() {
+    let navbarSupportedContent = document.getElementById('navbarSupportedContent');
+    let navbarToggler = document.querySelector('.mobile-menu-btn');
+    navbarToggler.addEventListener('click', function () {
+      navbarToggler['aria-expanded'] = navbarToggler['aria-expanded'] ? false : true;
+      navbarToggler.classList.toggle('active');
+      navbarSupportedContent.classList.toggle('show');
+    });
+    // let dd_menu = document.querySelector('#pages');
+    // const sub_menu = document.querySelector('.sub-menu');
+    // dd_menu.addEventListener('click', function () {
+    //   dd_menu['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
+    //   sub_menu.classList.toggle('collapsed');
+    //   sub_menu.classList.toggle('show');
+    // });
+
+    // let dd_menu2 = document.querySelector('#mypage');
+    // const sub_menu2 = document.querySelector('#submenu-1-5');
+    // dd_menu2.addEventListener('click', function () {
+    //   dd_menu2['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
+    //   sub_menu2.classList.toggle('collapsed');
+    //   sub_menu2.classList.toggle('show');
+    // });
     console.log(this.userInfo);
     console.log(this.isLogin);
   },

@@ -7,8 +7,8 @@ import vueCookies from 'vue-cookies';
 // import select from "@/assets/js/selectbox-search.js"
 
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 // import "@/assets/js/.min.js";
 // import jsbn from "@/assets/js/jsbn"
