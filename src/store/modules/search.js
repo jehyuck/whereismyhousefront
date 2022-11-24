@@ -21,6 +21,8 @@ const searchStore = {
       let searchData = payload.data;
       let search = payload.search;
       
+      console.log("payload...........", payload);
+      console.log("payload...........",searchData);
       state.apts = searchData.houseList;
       state.sidocode = searchData.sidoCode;
       state.guguncode = searchData.gugunCode;
@@ -52,21 +54,23 @@ const searchStore = {
   actions: {
     getAptData({ commit, }, search) {
       http
-        .get(`/house?sido=${search.sido}&gugun=${search.gugun}&dong=${search.dong}&pgno=${search.searchPgno}&aptname=${search.word}`)
-        .then(({ data }) => {
-          commit("SET_APT_LIST", { data: data, search: search });
-          commit('SET_PAGE_NUM', { start: 1, page:1 });
+      .get(`/house?sido=${search.sido}&gugun=${search.gugun}&dong=${search.dong}&pgno=${search.searchPgno}&aptname=${search.word}`)
+      .then(({ data }) => {
+        console.log("search........",search);
+        console.log("data........",data);
+        commit("SET_APT_LIST", { data: data, search: search });
+        commit('SET_PAGE_NUM', { start: 1, page:1 });
         })
         .catch((res) => {
           console.log(res);
         });
-    },
-    setStartEnd({ commit, }, page) {
-      var start = Math.floor((page - 1) / 10) * 10 + 1;
-      // let arg = { sido: this.state.sidocode, gugun: this.guguncode, dong: this.dongcode, pgno: this.searchPgno, word: this.word };
-      commit('SET_PAGE_NUM', { page: page, start: start});
-      http
-          .get(`house?sido=${this.state.sidocode}&gugun=${this.state.guguncode}&dong=${this.state.dongcode}&pgNo=${this.state.searchPgno}&aptname=${this.state.aptname}`)
+      },
+      setStartEnd: function({ commit, state}, page) {
+        var start = Math.floor((page - 1) / 10) * 10 + 1;
+        // let arg = { sido: this.state.sidocode, gugun: this.guguncode, dong: this.dongcode, pgno: this.searchPgno, word: this.word };
+        commit('SET_PAGE_NUM', { page: page, start: start });
+        http
+        .get(`house?sido=${state.sidocode}&gugun=${state.guguncode}&dong=${state.dongcode}&pgNo=${state.searchPgno}&aptname=${state.aptname}`)
           .then(({ data }) => {
             commit("SET_ONLY_APT_LIST", data.houseList);
           })
@@ -74,11 +78,11 @@ const searchStore = {
             console.log(res);
           });
     },
-    moveStartEnd({ commit }, plusOrMinus) {
-      let newStart = this.state.start + plusOrMinus;
-      let newEnd = this.state.end + plusOrMinus;
+    moveStartEnd({ commit, state }, plusOrMinus) {
+      let newStart = state.start + plusOrMinus;
+      let newEnd = state.end + plusOrMinus;
 
-      commit("SET_PAGE_NUM", {page:this.state.searchPgno, start:newStart, end:newEnd})
+      commit("SET_PAGE_NUM", {page:state.searchPgno, start:newStart, end:newEnd})
     }
   },
 }
