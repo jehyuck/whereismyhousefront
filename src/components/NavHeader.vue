@@ -25,16 +25,16 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <router-link
+                  <a
                     id="pages"
                     class="dd-menu collapsed"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-4"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
-                    :to="{ name: 'aptSearch' }"
+                    href="javascript:void(0)"
                     aria-label="Toggle navigation"
-                    >Pages</router-link
+                    >Pages</a
                   >
                   <ul class="sub-menu collapse zz" id="submenu-1-4">
                     <ul class="zz">
@@ -47,8 +47,9 @@
                 </li>
                 <!-- <c:if test="${not empty userInfo}"> -->
                 <li class="nav-item">
-                  <router-link
-                    :to="{ name: 'mypage' }"
+                  <a
+                    id="mypage"
+                    href="javascript:void(0)"
                     class="dd-menu collapsed"
                     data-bs-toggle="collapse"
                     data-bs-target="#submenu-1-5"
@@ -56,21 +57,13 @@
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                     >My Page
-                  </router-link>
-                  <div
-                    id="mypage"
-                    class="dd-menu collapsed"
-                    :to="{ name: 'mypage' }"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#submenu-1-5"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
-                    My Page
-                  </div>
+                  </a>
                   <ul class="sub-menu collapse" id="submenu-1-5">
-                    <li class="nav-item"><router-link :to="{ name: 'Bookmark' }">나의 관심 지역</router-link></li>
+                    <ul class="zz">
+                      <li class="nav-item zz"><router-link :to="{ name: 'userModify' }">회원정보 조회/수정</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'Bookmark' }">나의 관심 지역</router-link></li>
+                      <li class="nav-item zz"><router-link :to="{ name: 'withdrawal' }">회원탈퇴</router-link></li>
+                    </ul>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -141,21 +134,23 @@ export default {
       navbarToggler.classList.toggle('active');
       navbarSupportedContent.classList.toggle('show');
     });
-    // let dd_menu = document.querySelector('#pages');
-    // const sub_menu = document.querySelector('.sub-menu');
-    // dd_menu.addEventListener('click', function () {
-    //   dd_menu['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
-    //   sub_menu.classList.toggle('collapsed');
-    //   sub_menu.classList.toggle('show');
-    // });
+    let dd_menu = document.querySelector('#pages');
+    const sub_menu = document.querySelector('.sub-menu');
+    dd_menu.addEventListener('click', function () {
+      dd_menu['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
+      dd_menu.classList.toggle('collapsed');
+      sub_menu.classList.toggle('collapse');
+      sub_menu.classList.toggle('show');
+    });
 
-    // let dd_menu2 = document.querySelector('#mypage');
-    // const sub_menu2 = document.querySelector('#submenu-1-5');
-    // dd_menu2.addEventListener('click', function () {
-    //   dd_menu2['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
-    //   sub_menu2.classList.toggle('collapsed');
-    //   sub_menu2.classList.toggle('show');
-    // });
+    let dd_menu2 = document.querySelector('#mypage');
+    const sub_menu2 = document.querySelector('#submenu-1-5');
+    dd_menu2.addEventListener('click', function () {
+      dd_menu2['aria-expanded'] = dd_menu['aria-expanded'] ? false : true;
+      dd_menu2.classList.toggle('collapsed');
+      sub_menu2.classList.toggle('collapse');
+      sub_menu2.classList.toggle('show');
+    });
     console.log(this.userInfo);
     console.log(this.isLogin);
   },
