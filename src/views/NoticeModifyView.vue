@@ -76,7 +76,8 @@ export default {
       console.log(this.notice);
       http
         .put('/notice', this.notice)
-        .then(() => {
+        .then((res) => {
+          console.log('....................', res);
           this.$router.push({ name: 'noticeList' });
         })
         .catch((res) => {
