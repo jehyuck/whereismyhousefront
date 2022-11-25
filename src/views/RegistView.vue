@@ -34,7 +34,7 @@
           <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
             <div class="form-head">
               <h4 class="title">회원가입</h4>
-              <form @submit="registHandler" id="formRegist">
+              <form @submit.prevent="registHandler" id="formRegist" method="POST">
                 <div class="socila-login">
                   <ul>
                     <li>
@@ -125,8 +125,9 @@ export default {
         name: 'home',
       });
     },
-    registHandler() {
+    registHandler(e) {
       //데이타 검증
+      console.log('왜안돼!!!!!!!!!!!!!!', e);
       let err = false;
       let msg = '';
       !this.user.id && ((msg = '아이디를 입력해 주세요'), (err = true), this.$refs.id.focus());
