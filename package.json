@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve  --host localhost --open --port 9000",
     "build": "vue-cli-service build --dest C:\\SSAFY\\git\\whereismyhousevueback\\src\\main\\resources\\static",
-    "bbuild": "vue-cli-service build --dest C:/SSAFY/git/app/dist",
+    "bbuild": "vue-cli-service build --dest C:/SSAFY/git/whereismyhousevueback/app/dist",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
